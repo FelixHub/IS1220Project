@@ -1,9 +1,30 @@
 package myVelib;
 
-public class ParkingSlot {
+import java.util.ArrayList;
+import java.util.Observable;
+
+public class ParkingSlot extends Observable {
 	int ID;
-	Bicycle[] content;
+	ArrayList<Bicycle> content;
 	boolean isOnline;
+	
+	void empty() {
+		content.remove(0);
+	}
+	void fill(Bicycle b) {
+		if (content.isEmpty()) {
+			content.add(b);
+		}
+	}
+	
+	
+	
+	public ParkingSlot(int iD, ArrayList<Bicycle> content, boolean isOnline) {
+		super();
+		ID = iD;
+		this.content = content;
+		this.isOnline = isOnline;
+	}
 	
 	
 }
