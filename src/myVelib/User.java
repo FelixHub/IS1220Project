@@ -8,7 +8,7 @@ public class User {
 	float timeSpentOnBike;
 	float timeCreditBalance;
 	
-	public void askRideTo(GPS gps, PathAlg pathAlg,Bicycle bicycle) {
+	public void askRideTo(GPS gps, PathFinder pathAlg,Bicycle bicycle) {
 		ride = new Ride(coor,gps,bicycle);
 	}
 	
