@@ -9,7 +9,7 @@ public class User {
 	float timeCreditBalance;
 	
 	public void askRideTo(GPS gps, PathAlg pathAlg,Bicycle bicycle) {
-		ride = new Ride(coor,gps,bicycle);
+		Ride ride = new Ride(coor,gps,bicycle);
 	}
 	
 	
