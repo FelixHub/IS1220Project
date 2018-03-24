@@ -3,13 +3,11 @@ package myVelib;
 import java.util.ArrayList;
 
 import myVelib.Station.Station;
-import java.lang.Math;
 
 public class ShortestPath implements PathFinder {
 	
 	public Station startStation;
 	public Station endStation;
-	
 	
 
 	@Override
@@ -36,3 +34,4 @@ public class ShortestPath implements PathFinder {
 					
 					
 }
+

@@ -1,6 +1,7 @@
 package myVelib.Card;
 
 import myVelib.Bicycle.Bicycle;
+import myVelib.Bicycle.ElectricBicycle;
 
 public class VLIBRE_Card extends Card{
 
@@ -18,7 +19,7 @@ public class VLIBRE_Card extends Card{
 			else {
 				this.setTimeCredit(0);
 				chargedTime = (chargedTime-timeCred);
-						if ((bicycle.getType()).equals("Electric")) {
+						if (bicycle instanceof ElectricBicycle) {
 							c = 1 + 2*(chargedTime/60);
 						}
 						else {c = 1 + chargedTime/60;}

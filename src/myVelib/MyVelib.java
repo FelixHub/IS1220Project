@@ -4,11 +4,9 @@ import java.util.ArrayList;
 
 import myVelib.Card.Card;
 import myVelib.Station.Station;
-import java.lang.Math;
-
 
 public class MyVelib {
-	
+
 	private ArrayList<Station> stations=new ArrayList<Station>();
 	private ArrayList<User> users = new ArrayList<User>();
 	Clock clock;
@@ -30,18 +28,20 @@ public class MyVelib {
 			i++;
 		}
 			
+
 	
 	}
 	public double[][] getDistanceMap() {
 		return distanceMap;
+
 	}
-	// on va faire une map de 100*100 je pense, à préciser dès le début
+		
+
+	
 	public void addUser(String name,Card cT) {
 		
 	}
-	public void addStation(String nam) {
-		
-	}
+	
 	
 
 
