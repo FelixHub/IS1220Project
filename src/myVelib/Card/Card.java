@@ -1,5 +1,7 @@
 package myVelib.Card;
 
+import java.util.Random;
+
 import myVelib.Bicycle.Bicycle;
 
 public abstract class Card {
@@ -22,5 +24,19 @@ public abstract class Card {
 	
 	public void setTimeCredit(int time) {
 		timeCredit = timeCredit + time;
+	}
+	
+	public void card() {
+		Random rn = new Random();
+		int randomNum = rn.nextInt(3);
+		if (randomNum == 0) {
+			new VLIBRE_Card();
+		}
+		else if (randomNum == 1){
+			new VMAX_Card();
+		}
+		else {
+			new NoCard();
+		}
 	}
 }

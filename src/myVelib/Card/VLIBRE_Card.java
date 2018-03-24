@@ -3,6 +3,7 @@ package myVelib.Card;
 import myVelib.Bicycle.Bicycle;
 
 public class VLIBRE_Card extends Card{
+
 	
 	@Override
 	public double rideCost(int time,Bicycle bicycle) {
@@ -21,10 +22,14 @@ public class VLIBRE_Card extends Card{
 							c = 1 + 2*(chargedTime/60);
 						}
 						else {c = 1 + chargedTime/60;}
-				
+				return c;
 			}
 		}
 		return 0;
+	}
+	
+	public VLIBRE_Card() {
+		super();
 	}
 
 }
