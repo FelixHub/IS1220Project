@@ -1,10 +1,10 @@
 package myVelib;
 
-public class MyClock {
+public class Clock {
 	
 	private final long offset;
 
-    public MyClock(){
+    public Clock(){
         offset = System.currentTimeMillis();
     }
 

@@ -9,7 +9,7 @@ import myVelib.Station.Station;
 public class Ride implements Observer{
 
 	
-	MyClock clock;
+	Clock clock;
 	GPS start_gps;
 	GPS dest_gps;
 	PathFinder path;
@@ -21,7 +21,7 @@ public class Ride implements Observer{
 		this.dest_gps = dest_gps;
 		this.path = path;
 		this.bycicle = bycicle;
-		this.clock=new MyClock();
+		this.clock=new Clock();
 		
 	}
 

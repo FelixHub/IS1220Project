@@ -10,7 +10,6 @@ import myVelib.Bicycle.Bicycle;
 public class Station extends Observable {
 	
 	GPS position;
-	int ID;
 	StationState state;
 	Bicycle[] parkingSlots;
 	int capacity;
@@ -20,6 +19,16 @@ public class Station extends Observable {
 	//boolean isFull;
 	
 	static int count_ID;
+
+	public GPS getPosition() {
+		return position;
+	}
+
+	public StationState getState() {
+		return state;
+	}
+	
+	
 	
 	
 	
