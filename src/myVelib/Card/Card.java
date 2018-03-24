@@ -5,7 +5,7 @@ import java.util.Random;
 import myVelib.Bicycle.Bicycle;
 
 public abstract class Card {
-	
+	 
 	private int timeCredit;
 	
 	

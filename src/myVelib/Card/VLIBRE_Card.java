@@ -4,7 +4,7 @@ import myVelib.Bicycle.Bicycle;
 
 public class VLIBRE_Card extends Card{
 
-	
+	 
 	@Override
 	public double rideCost(int time,Bicycle bicycle) {
 		double c = 0;
