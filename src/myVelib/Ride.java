@@ -7,12 +7,7 @@ import myVelib.Bicycle.Bicycle;
 import myVelib.Station.Station;
 
 public class Ride implements Observer{
-<<<<<<< HEAD
-	Station startStation;
-	Station destStation;
-	// créer t debut et t fin
-=======
->>>>>>> branch 'master' of https://github.com/FelixHub/IS1220Project.git
+
 	
 	MyClock clock;
 	GPS start_gps;

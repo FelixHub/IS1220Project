@@ -2,22 +2,26 @@ package myVelib;
 
 import java.util.ArrayList;
 
+import myVelib.Card.Card;
 import myVelib.Station.Station;
 
 public class MyVelib {
 	
-	ArrayList<Station> stations;
-	ArrayList<User> users;
+	private ArrayList<Station> stations;
+	private ArrayList<User> users;
 	
 
-	public MyVelib(N,M) {
+	public MyVelib(int N,int M) {
 		// TODO Auto-generated constructor stub
 	}
 	// on va faire une map de 100*100 je pense, à préciser dès le début
-	public addUser(String name,x,y,CardType cT) {
+	public void addUser(String name,Card cT) {
 		
 	}
 	
 	
 
 }
+	public ArrayList<Station> getStations() {
+		return stations;
+	}
