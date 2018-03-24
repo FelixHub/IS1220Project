@@ -1,6 +1,9 @@
 package myVelib.Bicycle;
 
 public abstract class Bicycle {
-	int ID;
+	private int ID;
+	static int count_ID;
+	
+	
 	
 }
