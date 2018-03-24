@@ -21,7 +21,9 @@ public class MyVelib {
 	
 	
 
-}
+
 	public ArrayList<Station> getStations() {
 		return stations;
 	}
+
+}

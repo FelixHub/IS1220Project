@@ -8,10 +8,12 @@ public class MyClock {
         offset = System.currentTimeMillis();
     }
 
-    public long getSeconds()
+    public long getTime()
     {
         return ((System.currentTimeMillis() - offset));
     }
+    
+    
 
 
 }
