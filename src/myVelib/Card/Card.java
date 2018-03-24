@@ -3,6 +3,7 @@ package myVelib.Card;
 import java.util.Random;
 
 import myVelib.Bicycle.Bicycle;
+import myVelib.Bicycle.ElectricBicycle;
 
 public abstract class Card {
 	 
@@ -10,7 +11,7 @@ public abstract class Card {
 	
 	
 	public double rideCost(int time, Bicycle bicycle) {
-		if ((bicycle.getType()).equals("Electric")) {
+		if (bicycle instanceof ElectricBicycle) {
 			return 2*(1 + time/60);
 		}
 		else {

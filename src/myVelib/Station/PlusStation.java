@@ -8,7 +8,7 @@ import myVelib.Bicycle.Bicycle;
 
 public class PlusStation extends Station {
 	
-	public PlusStation(GPS position, StationState state, int capacity) {
+	public PlusStation(GPS position, String state, int capacity) {
 		super();
 		this.position = position;
 		this.ID = Station.count_ID;
@@ -20,5 +20,6 @@ public class PlusStation extends Station {
 		this.state = state;
 		//this.observers = new ArrayList<Observer>();
 	}
-
+	
+	
 }

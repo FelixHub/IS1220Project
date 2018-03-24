@@ -6,6 +6,6 @@ public class ElectricBicycle extends Bicycle {
 		super();
 		this.ID = Bicycle.count_ID;
 		Bicycle.count_ID ++;
-		this.type = "Electric";
+		this.type = BicycleType.ELECTRIC;
 	}
 }

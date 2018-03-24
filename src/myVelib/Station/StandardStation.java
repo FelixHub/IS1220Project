@@ -8,7 +8,7 @@ import myVelib.Bicycle.Bicycle;
 
 public class StandardStation extends Station {
 
-	public StandardStation(GPS position, StationState state, int capacity) {
+	public StandardStation(GPS position, String state, int capacity) {
 		super();
 		this.position = position;
 		this.ID = Station.count_ID;
