@@ -1,7 +1,9 @@
-package myVelib;
+package myVelib.Station;
 
 import java.util.ArrayList;
 import java.util.Observable;
+
+import myVelib.Bicycle;
 
 public class ParkingSlot extends Observable {
 	int ID;
@@ -26,11 +28,12 @@ public class ParkingSlot extends Observable {
 	}
 	
 	
-	public ParkingSlot(int iD, ArrayList<Bicycle> content, boolean isOnline) {
+	public ParkingSlot(int iD, ArrayList<Bicycle> content, boolean isOnline, Station station) {
 		super();
 		ID = iD;
 		this.content = content;
 		this.isOnline = isOnline;
+		this.station = station;
 	}
 	
 	

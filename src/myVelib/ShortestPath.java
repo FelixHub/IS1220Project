@@ -1,5 +1,7 @@
 package myVelib;
 
+import myVelib.Station.Station;
+
 public class ShortestPath implements PathFinder {
 	
 

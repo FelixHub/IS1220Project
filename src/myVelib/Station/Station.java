@@ -1,9 +1,12 @@
-package myVelib;
+package myVelib.Station;
 
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
+import myVelib.GPS;
+import myVelib.Station.Station.ParkingSlot;
 
 public class Station extends Observable {
 	String name;
@@ -11,6 +14,7 @@ public class Station extends Observable {
 	int ID;
 	boolean isOpen;
 	ArrayList<ParkingSlot> parkingSlots;
+	int capacity;
 	int nbRent;
 	int nbReturn;
 	ArrayList<Observer> observers = new ArrayList<Observer>();
