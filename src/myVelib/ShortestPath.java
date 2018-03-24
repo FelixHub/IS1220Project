@@ -1,5 +1,7 @@
 package myVelib;
 
+import java.util.ArrayList;
+
 import myVelib.Station.Station;
 
 public class ShortestPath implements PathFinder {
@@ -10,7 +12,7 @@ public class ShortestPath implements PathFinder {
 
 	@Override
 	public void Path() {
-		for ( Station station: MyVelib.getStations() ) {
+		for ( Station station:  MyVelib.getStations() ) {
 		// TODO Auto-generated method stub
 		
 
