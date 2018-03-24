@@ -13,13 +13,27 @@ import myVelib.Bicycle.MechanicalBicycle;
 public abstract class Station {
 	
 	GPS position;
+<<<<<<< HEAD
 	int ID;
 	String state;
+=======
+	StationState state;
+>>>>>>> branch 'master' of https://github.com/FelixHub/IS1220Project.git
 	Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
 	int nbReturn;
 	static int count_ID;
+
+	public GPS getPosition() {
+		return position;
+	}
+
+	public StationState getState() {
+		return state;
+	}
+	
+	
 	
 	class FullStationException extends Exception{}
 	class EmptyStationException extends Exception{}
