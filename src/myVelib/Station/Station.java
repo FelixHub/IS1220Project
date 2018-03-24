@@ -1,5 +1,6 @@
 package myVelib.Station;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ public abstract class Station {
 	int nbRent;
 	int nbReturn;
 	static int count_ID;
+	ArrayList<Integer>[] occupationRecord;
 	
 	
 	class FullStationException extends Exception{}
@@ -39,12 +41,14 @@ public abstract class Station {
 						user.ridesNb ++;
 						if ((this.state).equalsIgnoreCase("PLUS")){
 							user.getUserCard().setTimeCredit(user.getUserCard().getTimeCredit()+5);
+							user.timeCreditBalance = user.timeCreditBalance + 5;
 						}
-						user.timeCreditBalance = user.getUserCard().getTimeCredit();
+						
 						break;
 					}
 				}
-			}
+				nbReturn ++;
+			} 
 		} catch(FullStationException e) { System.out.println("there's no more parking spot at station"+ID);}
 	}
 	
@@ -60,8 +64,8 @@ public abstract class Station {
 						// à ce moment là doit se déclencher le décompte en temps de ride
 					}
 				}
+				nbRent ++;
 			}
-			
 		} catch(EmptyStationException e ) {System.out.println("the desired bicycle type is not available at station"+ID);}
 	return null;
 	}

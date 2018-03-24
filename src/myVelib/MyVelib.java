@@ -11,14 +11,14 @@ public class MyVelib {
 
 	private ArrayList<Station> stations=new ArrayList<Station>();
 	private ArrayList<User> users = new ArrayList<User>();
-	Clock clock;
+	private MyClock clock;
 	private double [][] distanceMap;
 
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers) {
 		
 		this.stations=listOfStations;
 		this.users=listOfUsers;
-		this.clock=new Clock();
+		this.clock=new MyClock();
 		this.distanceMap= new double [stations.size()][stations.size()];
 		int i = 0;
 		int j = 0;
