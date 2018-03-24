@@ -12,8 +12,7 @@ public class ShortestPath implements PathFinder {
 
 	@Override
 	public void Path() {
-		for ( Station station:  MyVelib.getStations() ) {
-		// TODO Auto-generated method stub
+		
 		
 
 	}
