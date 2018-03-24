@@ -1,28 +1,33 @@
 package myVelib.Station;
 
-
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import myVelib.GPS;
-import myVelib.Station.Station.ParkingSlot;
+import myVelib.Bicycle.Bicycle;
 
 public class Station extends Observable {
-	String name;
-	GPS coordinate;
+	
+	GPS position;
 	int ID;
-	boolean isOpen;
-	ArrayList<ParkingSlot> parkingSlots;
+	StationState state;
+	Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
 	int nbReturn;
-	ArrayList<Observer> observers = new ArrayList<Observer>();
-	boolean isFull;
+	//ArrayList<Observer> observers;
+	//boolean isFull;
 	
-	public void registerObserver(Observer observer) {
-		observers.add(observer);
-	}
+	static int count_ID;
+	
+	
+	
+	
+
+}
+	
+/**
 	
 	public void removeObserver(Observer observer) {
 		observers.remove(observer);
@@ -36,7 +41,7 @@ public class Station extends Observable {
 			}
 		if (this.isFull) {
 			for (Observer ob : observers) 
-				ob.update(this,this.name);
+				ob.update(this,this.ID);
 	}
 	
 	
@@ -46,3 +51,4 @@ public class Station extends Observable {
 	
 
 }
+**/

@@ -9,10 +9,7 @@ public class StationFactory {
 				return new PlusStation(position,state,capacity);
 			}
 			else {
-				return new StandardStation();
+				return new StandardStation(position,state,capacity);
 			}
-	}
-	
-	public StationFactory() {
 	}
 }

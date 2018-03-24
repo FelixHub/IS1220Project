@@ -3,7 +3,7 @@ package myVelib.Station;
 import java.util.ArrayList;
 import java.util.Observable;
 
-import myVelib.Bicycle;
+import myVelib.Bicycle.Bicycle;
 
 public class ParkingSlot extends Observable {
 	int ID;

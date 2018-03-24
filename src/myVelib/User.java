@@ -1,5 +1,8 @@
 package myVelib;
 
+import myVelib.Bicycle.Bicycle;
+import myVelib.Card.Card;
+
 public class User {
 	String name;
 	GPS coor;
