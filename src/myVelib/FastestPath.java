@@ -2,7 +2,7 @@ package myVelib;
 
 import myVelib.Station.Station;
 
-public class ShortestPath implements PathFinder {
+public class FastestPath implements PathFinder {
 	
 	private Station startStation;
 	private Station endStation;
@@ -44,7 +44,20 @@ public class ShortestPath implements PathFinder {
 	public Station getEndStation() {
 		return endStation;
 	}
-			
-					
+	
 }
+		
+		
+		
+		
+		
+		
+	
+
+
+
+
+
+	
+
 
