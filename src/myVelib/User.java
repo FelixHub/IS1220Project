@@ -6,9 +6,9 @@ public class User {
 	String name;
 	GPS position;
 	Card userCard;
-	int ridesNb;
+	public int ridesNb;
 	float timeSpentOnBike;
-	float timeCreditBalance;
+	public float timeCreditBalance;
 	int ID;
 	static int count_ID;
 
@@ -18,7 +18,7 @@ public class User {
 		this.userCard = card;
 		this.ridesNb = 0;
 		this.timeSpentOnBike = 0;
-		this.timeCreditBalance = 0;	
+		this.timeCreditBalance = 0;
 		this.ID = count_ID;
 		User.count_ID ++;
 	}

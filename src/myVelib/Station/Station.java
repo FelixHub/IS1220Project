@@ -13,26 +13,13 @@ import myVelib.Bicycle.MechanicalBicycle;
 public abstract class Station {
 	
 	GPS position;
-<<<<<<< HEAD
 	int ID;
 	String state;
-=======
-	StationState state;
->>>>>>> branch 'master' of https://github.com/FelixHub/IS1220Project.git
 	Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
 	int nbReturn;
 	static int count_ID;
-
-	public GPS getPosition() {
-		return position;
-	}
-
-	public StationState getState() {
-		return state;
-	}
-	
 	
 	
 	class FullStationException extends Exception{}
@@ -49,6 +36,11 @@ public abstract class Station {
 						parkingSlots[i] = bicycle;
 						// c'est là où on récupère le temps de la fin du ride et où on lance 
 						// le débit de la carte de user + rajout de temps si dans une station +
+						user.ridesNb ++;
+						if ((this.state).equalsIgnoreCase("PLUS")){
+							user.getUserCard().setTimeCredit(user.getUserCard().getTimeCredit()+5);
+						}
+						user.timeCreditBalance = user.getUserCard().getTimeCredit();
 						break;
 					}
 				}
