@@ -11,18 +11,14 @@ public class MyVelib {
 
 	private ArrayList<Station> stations=new ArrayList<Station>();
 	private ArrayList<User> users = new ArrayList<User>();
-<<<<<<< HEAD
-	static MyClock clock;
-=======
 	private static MyClock clock;
->>>>>>> branch 'master' of https://github.com/FelixHub/IS1220Project.git
 	private double [][] distanceMap;
 
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers) {
 		
 		this.stations=listOfStations;
 		this.users=listOfUsers;
-		this.clock=new MyClock();
+		this.clock =new MyClock();
 		this.distanceMap= new double [stations.size()][stations.size()];
 		int i = 0;
 		int j = 0;

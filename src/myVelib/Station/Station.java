@@ -21,12 +21,13 @@ public abstract class Station extends Observable {
 	GPS position;
 	int ID;
 	String state;
+	String type;
 	Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
 	int nbReturn;
 	static int count_ID;
-	ArrayList<Integer>[] occupationRecord;
+	long[][] occupationRecord;
 	
 	ArrayList<Observer> incomingRides;
 	
@@ -56,14 +57,15 @@ public abstract class Station extends Observable {
 			else {
 				for(int i = 0; i < capacity; i++) {
 					if (parkingSlots[i] == null) {
-						
 						parkingSlots[i] = bicycle;
-						user.getCurrentRide().setBicycleRideEnd();
+						long returnTime = MyVelib.getClock().getTime();
+						occupationRecord[i][1] = returnTime;
 						nbReturn ++;
 						user.addCharges( user.getUserCard().rideCost(
-								MyVelib.getClock().getTime() - user.TimeOfLastRenting,bicycle));
+								returnTime - user.TimeOfLastRenting,bicycle));
 						user.ridesNb ++;
-						if ((this.state).equalsIgnoreCase("PLUS")){
+						user.setCurrentRide(null);
+						if ((this.type).equalsIgnoreCase("PLUS")){
 							user.getUserCard().setTimeCredit(user.getUserCard().getTimeCredit()+5);
 							user.timeCreditBalance = user.timeCreditBalance + 5;
 						}
@@ -83,6 +85,7 @@ public abstract class Station extends Observable {
 				for(int i = 0; i < capacity; i++) {
 					if ((parkingSlots[i].getType()).equals(type)) {
 						user.TimeOfLastRenting = MyVelib.getClock().getTime();
+						occupationRecord[i][0] = occupationRecord[i][0] + (user.TimeOfLastRenting - occupationRecord[i][1]);
 						nbRent ++;
 						Bicycle temp = parkingSlots[i];
 						parkingSlots[i] = null;
@@ -148,102 +151,18 @@ public abstract class Station extends Observable {
 	public void setParkingSlots(Bicycle[] parkingSlots) {
 		this.parkingSlots = parkingSlots;
 	}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//public abstract class Station extends Observable {
-//ArrayList<Observer> observers;
-	//boolean isFull;
 	
-/**
-	
-	public void removeObserver(Observer observer) {
-		observers.remove(observer);
-	}
-	
-	public void notifyObserver() {
-		
-		for (ParkingSlot parkingSlot : parkingSlots) {
-			if (parkingSlot.isEmpty()) { isFull = false; }
-			else { isFull = isFull && true; };
+	public float averageRateOfOccupation() {
+		//long te = 0;
+		long ts = MyVelib.getClock().getTime();
+		float s = 0;
+		for(int i = 0; i< capacity;i++) {
+			occupationRecord[i][0] = occupationRecord[i][0] + (ts - occupationRecord[i][1]);
+			occupationRecord[i][1] = ts;
+			s = s + occupationRecord[i][0];
 			}
-		if (this.isFull) {
-			for (Observer ob : observers) 
-				ob.update(this,this.ID);
+		s = s/(ts*capacity);
+		return s;
 	}
-	
-	
-	
-	}
-	
-	
 
 }
-
-package myVelib.Station;
-
-import java.util.ArrayList;
-import java.util.Observable;
-
-import myVelib.Bicycle.Bicycle;
-
-public class ParkingSlot extends Observable {
-	int ID;
-	ArrayList<Bicycle> content;
-	boolean isOnline;
-	Station station;
-	
-	void empty() {
-		content.remove(0);
-	}
-	
-	void fill(Bicycle b) {
-		if (content.isEmpty()) {
-			content.add(b);
-			station.notifyObserver();
-		}
-	}
-	
-	boolean isEmpty() {
-		if (content.size() < 1) return true;
-		return false;
-	}
-	
-	
-	public ParkingSlot(int iD, ArrayList<Bicycle> content, boolean isOnline, Station station) {
-		super();
-		ID = iD;
-		this.content = content;
-		this.isOnline = isOnline;
-		this.station = station;
-	}
-	
-	
-}
-
-**/

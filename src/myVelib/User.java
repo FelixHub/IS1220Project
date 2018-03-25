@@ -64,5 +64,9 @@ public class User {
 	public void addCharges(double charges){
 		chargesAmount = chargesAmount + charges;
 	}
+
+	public void setCurrentRide(Ride ride) {
+		currentRide = ride;
+	}
 	
 }
