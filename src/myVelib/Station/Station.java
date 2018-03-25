@@ -51,13 +51,16 @@ public abstract class Station extends Observable {
 	
 	ArrayList<Observer> incomingRides;
 	
+	
 	public void removeObserver(Observer observer) {
 		incomingRides.remove(observer); 
 	}
 	public void addObserver(Observer observer) {
 		incomingRides.add(observer);
 	}
-	
+	/**
+	 *  Station class notify its Ride observer of its indisponibility.
+	 */
 	public void notifyObserver() {
 		if ( (freeParkingSpotsNb() == 0) || (state.equals("OFFLINE")) ){
 			for (Observer ob : incomingRides) {
@@ -198,6 +201,12 @@ public abstract class Station extends Observable {
 			}
 		s = s/(ts*capacity);
 		return s;
+	}
+	
+	public Station(String stationType,GPS position, int capacity) {
+		StationFactory.createStation(stationType,position, capacity);
+	}
+	public Station() {
 	}
  
 }
