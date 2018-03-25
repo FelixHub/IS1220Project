@@ -10,12 +10,12 @@ import myVelib.Station.Station;
 
 public class Ride implements Observer{
 
-	GPS start;
-	GPS end;
-	String algType;
-	PathFinder path;
-	Bicycle bicycle;
-	MyVelib velibNW;
+	private GPS start;
+	private GPS end;
+	private String algType;
+	private PathFinder path;
+	private Bicycle bicycle;
+	private MyVelib velibNW;
 
 	
 	
