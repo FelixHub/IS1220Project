@@ -3,9 +3,12 @@ package myVelib;
 import java.util.ArrayList;
 
 import myVelib.Card.Card;
+import myVelib.Misc.GPS;
 import myVelib.Misc.MyClock;
 import myVelib.Misc.User;
 import myVelib.Station.Station;
+import myVelib.Station.StationFactory;
+
 import java.lang.Math;
 /**
  * this is the main class of the program, which has the stations, users and the central Clock system as attributes
@@ -40,7 +43,20 @@ public class MyVelib {
 			}
 			i++;
 		}
-	}		
+	}
+	
+	public MyVelib(int nStations, int mParkingSpot) {
+		
+		StationFactory factory = new StationFactory();
+		for (int i=1; i<=nStations;i++) {
+			GPS gi=new GPS(10000);
+			
+			
+		}
+		
+	}
+	
+	
 	public double[][] getDistanceMap() {
 		return distanceMap;
 

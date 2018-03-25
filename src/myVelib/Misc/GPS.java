@@ -1,5 +1,7 @@
 package myVelib.Misc;
 
+import java.util.Random;
+
 public class GPS {
 	private int x;
 	private int y;
@@ -20,4 +22,10 @@ public class GPS {
 		this.y = y;
 	}
 	
+	public GPS(int sup) {
+		Random r = new Random();
+		this.x =r.nextInt(sup);
+		this.y=r.nextInt(sup);
+		
+	}
 }

@@ -6,8 +6,10 @@ import myVelib.Misc.GPS;
  *  a factory class to create different type of stations
  *
  */
-
 public class StationFactory {
+	
+	public StationFactory() {
+	}
 	
 	static Station createStation(String StationType,GPS position, int capacity) {
 			if(StationType.equalsIgnoreCase("PLUS")) {
@@ -17,4 +19,11 @@ public class StationFactory {
 				return new StandardStation(position,capacity);
 			}
 	}
+	
+	
+	
+	
 }
+
+
+
