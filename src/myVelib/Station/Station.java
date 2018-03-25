@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import myVelib.GPS;
 import myVelib.MyVelib;
-import myVelib.User;
 import myVelib.Bicycle.Bicycle;
 import myVelib.Bicycle.BicycleType;
 import myVelib.Bicycle.ElectricBicycle;
 import myVelib.Bicycle.MechanicalBicycle;
+import myVelib.Misc.GPS;
+import myVelib.Misc.User;
 
 public abstract class Station extends Observable {
 	

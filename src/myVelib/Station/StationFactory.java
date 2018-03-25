@@ -1,6 +1,6 @@
 package myVelib.Station;
 
-import myVelib.GPS;
+import myVelib.Misc.GPS;
 
 public class StationFactory {
 	

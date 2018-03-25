@@ -1,8 +1,8 @@
-package PathAlgorithm;
+package myVelib.PathAlgorithm;
 
-import myVelib.GPS;
 import myVelib.MyVelib;
 import myVelib.Bicycle.BicycleType;
+import myVelib.Misc.GPS;
 import myVelib.Station.Station;
 import java.lang.Math;
 

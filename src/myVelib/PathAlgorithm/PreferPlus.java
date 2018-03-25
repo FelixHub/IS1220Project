@@ -1,17 +1,16 @@
-package PathAlgorithm;
+package myVelib.PathAlgorithm;
 
-import myVelib.GPS;
 import myVelib.MyVelib;
 import myVelib.Bicycle.BicycleType;
-import myVelib.Station.StandardStation;
+import myVelib.Misc.GPS;
 import myVelib.Station.Station;
 
-public class AvoidPlus implements PathFinder {
+public class PreferPlus implements PathFinder {
 
 	private Station startStation;
 	private Station endStation;
 
-	public AvoidPlus() {
+	public PreferPlus() {
 		super();
 	}
 
@@ -39,9 +38,9 @@ public class AvoidPlus implements PathFinder {
 			double dj = Math.sqrt((start.getX()-velibNW.getStations().get(j).getPosition().getX())^2+(start.getY()-velibNW.getStations().get(j).getPosition().getY())^2);
 
 			if((de==0) || ((dj < de) 
-					&& (velibNW.getStations().get(j).freeParkingSpotsNb()!=0) 
-					&& (velibNW.getStations().get(j) instanceof StandardStation)
-					&& (velibNW.getStations().get(j).getState()=="ONSERVICE"))) {
+					&& (velibNW.getStations().get(j).freeParkingSpotsNb()!=0)
+					&& (velibNW.getStations().get(j).getState()=="ONSERVICE")
+					)) {
 				
 				de=dj;
 				endS=velibNW.getStations().get(j);
@@ -63,5 +62,6 @@ public class AvoidPlus implements PathFinder {
 
 		return this.endStation;
 	}
+
 
 }

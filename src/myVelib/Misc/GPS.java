@@ -1,4 +1,4 @@
-package myVelib;
+package myVelib.Misc;
 
 public class GPS {
 	private int x;

@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import myVelib.GPS;
+import myVelib.Misc.GPS;
 import myVelib.Station.StandardStation;
 import myVelib.Station.Station;
 

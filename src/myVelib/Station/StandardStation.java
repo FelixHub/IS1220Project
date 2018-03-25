@@ -3,8 +3,8 @@ package myVelib.Station;
 import java.util.ArrayList;
 import java.util.Observer;
 
-import myVelib.GPS;
 import myVelib.Bicycle.Bicycle;
+import myVelib.Misc.GPS;
 
 public class StandardStation extends Station {
 

@@ -1,16 +1,16 @@
-package PathAlgorithm;
+package myVelib.PathAlgorithm;
 
-import myVelib.GPS;
 import myVelib.MyVelib;
 import myVelib.Bicycle.BicycleType;
+import myVelib.Misc.GPS;
 import myVelib.Station.Station;
 
-public class PreferPlus implements PathFinder {
+public class UniformRepartition implements PathFinder {
 
 	private Station startStation;
 	private Station endStation;
 
-	public PreferPlus() {
+	public UniformRepartition() {
 		super();
 	}
 
@@ -25,9 +25,7 @@ public class PreferPlus implements PathFinder {
 			
 			double di = Math.sqrt((start.getX()-velibNW.getStations().get(i).getPosition().getX())^2+(start.getY()-velibNW.getStations().get(i).getPosition().getY())^2);
 			
-			if((ds==0) || ((di < ds) 
-					&& (velibNW.getStations().get(i).countBicycle(type)!=0)
-					&& (velibNW.getStations().get(i).getState()=="ONSERVICE"))) {
+			if((ds==0) || ((di < ds) && (velibNW.getStations().get(i).countBicycle(type)!=0))) {
 				
 				ds=di;
 				startS=velibNW.getStations().get(i);
@@ -37,10 +35,7 @@ public class PreferPlus implements PathFinder {
 			
 			double dj = Math.sqrt((start.getX()-velibNW.getStations().get(j).getPosition().getX())^2+(start.getY()-velibNW.getStations().get(j).getPosition().getY())^2);
 
-			if((de==0) || ((dj < de) 
-					&& (velibNW.getStations().get(j).freeParkingSpotsNb()!=0)
-					&& (velibNW.getStations().get(j).getState()=="ONSERVICE")
-					)) {
+			if((de==0) || ((dj < de) && (velibNW.getStations().get(j).freeParkingSpotsNb()!=0))) {
 				
 				de=dj;
 				endS=velibNW.getStations().get(j);
@@ -62,6 +57,5 @@ public class PreferPlus implements PathFinder {
 
 		return this.endStation;
 	}
-
 
 }

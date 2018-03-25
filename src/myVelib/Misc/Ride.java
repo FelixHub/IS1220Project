@@ -1,15 +1,16 @@
-package myVelib;
+package myVelib.Misc;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import PathAlgorithm.AlgType;
-import PathAlgorithm.FastestPath;
-import PathAlgorithm.PathFinder;
-import PathAlgorithm.ShortestPath;
+import myVelib.MyVelib;
 import myVelib.Bicycle.Bicycle;
 import myVelib.Bicycle.BicycleFactory;
 import myVelib.Bicycle.BicycleType;
+import myVelib.PathAlgorithm.AlgType;
+import myVelib.PathAlgorithm.FastestPath;
+import myVelib.PathAlgorithm.PathFinder;
+import myVelib.PathAlgorithm.ShortestPath;
 import myVelib.Station.Station;
 
 public class Ride implements Observer{
