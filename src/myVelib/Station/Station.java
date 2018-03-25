@@ -19,7 +19,7 @@ import myVelib.Misc.User;
  * a station is observed by the Ride classes for whom it is their EndStation. 
  * The Ride classes are notified if the station is put OFFLINE or if it become FULL.
  * 
- */
+ */ 
 public abstract class Station extends Observable {
 	
 	
