@@ -34,9 +34,15 @@ public class MyVelib {
 		return distanceMap;
 
 	}
-		
+	
 
 	
+	public ArrayList<User> getUsers() {
+		return users;
+	}
+	public MyClock getClock() {
+		return clock;
+	}
 	public void addUser(String name,Card cT) {
 		
 	}

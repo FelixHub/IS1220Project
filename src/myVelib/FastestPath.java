@@ -1,14 +1,13 @@
 package myVelib;
 
 import myVelib.Station.Station;
-import java.lang.Math;
 
-public class ShortestPath implements PathFinder {
+public class FastestPath implements PathFinder {
 	
 	private Station startStation;
 	private Station endStation;
 	
-	
+
 	@Override
 	public void Path(GPS start, GPS end, MyVelib velibNW) {
 		
@@ -45,8 +44,20 @@ public class ShortestPath implements PathFinder {
 	public Station getEndStation() {
 		return endStation;
 	}
-			
-					
+	
 }
+		
+		
+		
+		
+		
+		
+	
+
+
+
+
+
+	
 
 

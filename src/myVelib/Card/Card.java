@@ -7,10 +7,10 @@ import myVelib.Bicycle.ElectricBicycle;
 
 public abstract class Card {
 	 
-	private int timeCredit;
+	private long timeCredit;
 	
 	
-	public double rideCost(int time, Bicycle bicycle) {
+	public double rideCost(long time, Bicycle bicycle) {
 		if (bicycle instanceof ElectricBicycle) {
 			return 2*(1 + time/60);
 		}
@@ -19,12 +19,12 @@ public abstract class Card {
 		}
 	} 
 	
-	public int getTimeCredit() {
+	public long getTimeCredit() {
 		return timeCredit;
 	}
 	
-	public void setTimeCredit(int time) {
-		timeCredit = timeCredit + time;
+	public void setTimeCredit(long time) {
+		timeCredit = time;
 	}
 	
 	public void card() {

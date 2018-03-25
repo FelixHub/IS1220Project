@@ -7,10 +7,10 @@ public class VLIBRE_Card extends Card{
 
 	 
 	@Override
-	public double rideCost(int time,Bicycle bicycle) {
+	public double rideCost(long time,Bicycle bicycle) {
 		double c = 0;
-		int chargedTime = time - 60;
-		int timeCred = this.getTimeCredit();
+		long chargedTime = time - 60;
+		long timeCred = this.getTimeCredit();
 		if (chargedTime > 0) {
 			if ( timeCred > chargedTime) {
 				this.setTimeCredit(timeCred - chargedTime);

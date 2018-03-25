@@ -3,6 +3,8 @@ package myVelib.Station;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import myVelib.GPS;
 import myVelib.User;
@@ -11,7 +13,9 @@ import myVelib.Bicycle.BicycleType;
 import myVelib.Bicycle.ElectricBicycle;
 import myVelib.Bicycle.MechanicalBicycle;
 
-public abstract class Station {
+public abstract class Station extends Observable {
+	
+	
 	
 	GPS position;
 	int ID;
@@ -23,6 +27,21 @@ public abstract class Station {
 	static int count_ID;
 	ArrayList<Integer>[] occupationRecord;
 	
+	ArrayList<Observer> incomingRides;
+	
+	public void removeObserver(Observer observer) {
+		incomingRides.remove(observer);
+	}
+	public void addObserver(Observer observer) {
+		incomingRides.add(observer);
+	}
+	public void notifyObserver() {
+		if (freeParkingSpotsNb() == 0){
+			for (Observer ob : incomingRides) {
+				ob.update(this,this.ID);
+			}
+		}
+	}
 	
 	class FullStationException extends Exception{}
 	class EmptyStationException extends Exception{}
@@ -35,36 +54,40 @@ public abstract class Station {
 			else {
 				for(int i = 0; i < capacity; i++) {
 					if (parkingSlots[i] == null) {
+						
 						parkingSlots[i] = bicycle;
-						// c'est là où on récupère le temps de la fin du ride et où on lance 
-						// le débit de la carte de user + rajout de temps si dans une station +
+						user.getCurrentRide().setBicycleRideEnd();
+						nbReturn ++;
+						user.addCharges( user.getUserCard().rideCost(
+						user.getCurrentRide().getBicycleRideStart() - user.getCurrentRide().getBicycleRideEnd(),bicycle));
 						user.ridesNb ++;
 						if ((this.state).equalsIgnoreCase("PLUS")){
 							user.getUserCard().setTimeCredit(user.getUserCard().getTimeCredit()+5);
 							user.timeCreditBalance = user.timeCreditBalance + 5;
 						}
-						
+						notifyObserver();
 						break;
 					}
 				}
-				nbReturn ++;
 			} 
 		} catch(FullStationException e) { System.out.println("there's no more parking spot at station"+ID);}
 	}
 	
-	public Bicycle takeBicycle(BicycleType type) throws EmptyStationException {
+	public Bicycle takeBicycle(BicycleType type, User user) throws EmptyStationException {
 		try {
 			if (countBicycle(type) == 0) throw new EmptyStationException();
 			else {
 				for(int i = 0; i < capacity; i++) {
 					if ((parkingSlots[i].getType()).equals(type)) {
+						nbRent ++;
+						user.getCurrentRide().setBicycleRideStart();
 						Bicycle temp = parkingSlots[i];
 						parkingSlots[i] = null;
 						return temp;
-						// à ce moment là doit se déclencher le décompte en temps de ride
+	
 					}
 				}
-				nbRent ++;
+				
 			}
 		} catch(EmptyStationException e ) {System.out.println("the desired bicycle type is not available at station"+ID);}
 	return null;

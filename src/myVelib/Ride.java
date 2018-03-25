@@ -8,26 +8,52 @@ import myVelib.Station.Station;
 
 public class Ride implements Observer{
 
-	
-	MyClock clock;
-	GPS start_gps;
-	GPS dest_gps;
+	GPS start;
+	GPS end;
 	PathFinder path;
-	Bicycle bycicle;
+	Bicycle bicycle;
+	MyVelib velibNW;
+	long bicycleRideStart;
+	long bicycleRideEnd;
 	
 	
-	public Ride(GPS start_gps, GPS dest_gps, PathFinder path, Bicycle bycicle) {
-		this.start_gps = start_gps;
-		this.dest_gps = dest_gps;
+	public Ride(GPS start, GPS end, PathFinder path, Bicycle bycicle, MyVelib velibNW) {
+		
+		this.start=start;
+		this.end=end;
+		this.velibNW=velibNW;
 		this.path = path;
-		this.bycicle = bycicle;
-		this.clock=new MyClock();
+		this.bicycle = bycicle;
+		this.bicycleRideStart = 0;
+		this.bicycleRideEnd = 0;
+		//this.path.getStartStation() c'est la syntaxe pour avoir la station d'arrivée pour pouvoir faire add Observer et tout
+		//Pcque qu'on veut la surveiller
 		
 	}
+	
+
+	public void setBicycleRideStart() {
+		this.bicycleRideStart = velibNW.getClock().getTime();
+		
+	}
+	
+	public void setBicycleRideEnd() {
+		this.bicycleRideEnd = velibNW.getClock().getTime();
+	}
+	
 
 
+	public long getBicycleRideStart() {
+		return bicycleRideStart;
+	}
+
+	public long getBicycleRideEnd() {
+		return bicycleRideEnd;
+	}
+
+	
 	@Override
 	public void update(Observable o, Object arg) {
-		// on rappelle l'algo qui choisit le chemin
+		path = new PathFinder(start,end,velibNW,bicycle.getType());
 	}
 }

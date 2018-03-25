@@ -6,7 +6,7 @@ public class VMAX_Card extends Card{
 	
 	 
 	@Override
-	public double rideCost(int time,Bicycle bicycle) {
+	public double rideCost(long time,Bicycle bicycle) {
 		return(time/60);
 	}
 }
