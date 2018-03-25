@@ -8,9 +8,15 @@ public class FastestPath implements PathFinder {
 	private Station startStation;
 	private Station endStation;
 	
+	
+	
+
+	public FastestPath() {
+		super();
+	}
 
 	@Override
-	public void Path(GPS start, GPS end, MyVelib velibNW, BicycleType type) {
+	public void path(GPS start, GPS end, MyVelib velibNW, BicycleType type) {
 		
 		double t=0;
 		Station startS = null;
@@ -22,13 +28,24 @@ public class FastestPath implements PathFinder {
 				double di = Math.sqrt((start.getX()-velibNW.getStations().get(i).getPosition().getX())^2+(start.getY()-velibNW.getStations().get(i).getPosition().getY())^2);
 				double df = Math.sqrt((end.getX()-velibNW.getStations().get(j).getPosition().getX())^2+(end.getY()-velibNW.getStations().get(j).getPosition().getY())^2);
 				
-				if (type.equals(BicycleType.ELECTRIC)){
+				if (type.equals(BicycleType.MECHANICAL)){
 					
 					if((t==0) || ((di+df)*9/10+velibNW.getDistanceMap()[i][j]*6/25 < t) && (i!=j) && (velibNW.getStations().get(j).freeParkingSpotsNb()!=0) && (velibNW.getStations().get(i).countBicycle(type)!=0)) {
 					
 						startS=velibNW.getStations().get(i);
 						endS=velibNW.getStations().get(j);
-						d = di+df+velibNW.getDistanceMap()[i][j];
+						t = (di+df)*9/10+velibNW.getDistanceMap()[i][j]*6/25;
+					}
+				}
+
+				if (type.equals(BicycleType.ELECTRIC)){
+							
+					if((t==0) || ((di+df)*9/10+velibNW.getDistanceMap()[i][j]*9/50 < t) && (i!=j) && (velibNW.getStations().get(j).freeParkingSpotsNb()!=0) && (velibNW.getStations().get(i).countBicycle(type)!=0)) {
+							
+						startS=velibNW.getStations().get(i);
+						endS=velibNW.getStations().get(j);
+						t = (di+df)*9/10+velibNW.getDistanceMap()[i][j]*9/50;
+			
 						
 					}
 				}

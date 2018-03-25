@@ -10,8 +10,13 @@ public class ShortestPath implements PathFinder {
 	private Station endStation;
 	
 	
+	
+	public ShortestPath() {
+		super();
+	}
+
 	@Override
-	public void Path(GPS start, GPS end, MyVelib velibNW, BicycleType type) {
+	public void path(GPS start, GPS end, MyVelib velibNW, BicycleType type) {
 		
 		double d=0;
 		Station startS = null;
