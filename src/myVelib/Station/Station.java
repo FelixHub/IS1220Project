@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import myVelib.GPS;
+import myVelib.MyVelib;
 import myVelib.User;
 import myVelib.Bicycle.Bicycle;
 import myVelib.Bicycle.BicycleType;
@@ -46,6 +47,7 @@ public abstract class Station extends Observable {
 	class FullStationException extends Exception{}
 	class EmptyStationException extends Exception{}
 	class OffLineStationException extends Exception{}
+	class UserAlreadyHaveBicycleException extends Exception{}
 
 	
 	public void parkBicycle(Bicycle bicycle, User user) throws FullStationException {
@@ -59,7 +61,7 @@ public abstract class Station extends Observable {
 						user.getCurrentRide().setBicycleRideEnd();
 						nbReturn ++;
 						user.addCharges( user.getUserCard().rideCost(
-						user.getCurrentRide().getBicycleRideStart() - user.getCurrentRide().getBicycleRideEnd(),bicycle));
+								MyVelib.getClock().getTime() - user.TimeOfLastRenting,bicycle));
 						user.ridesNb ++;
 						if ((this.state).equalsIgnoreCase("PLUS")){
 							user.getUserCard().setTimeCredit(user.getUserCard().getTimeCredit()+5);
@@ -73,18 +75,18 @@ public abstract class Station extends Observable {
 		} catch(FullStationException e) { System.out.println("there's no more parking spot at station"+ID);}
 	}
 	
-	public Bicycle takeBicycle(BicycleType type, User user) throws EmptyStationException {
+	public Bicycle takeBicycle(BicycleType type, User user) throws EmptyStationException, UserAlreadyHaveBicycleException {
 		try {
 			if (countBicycle(type) == 0) throw new EmptyStationException();
+			if (user.possessBicycle) throw new UserAlreadyHaveBicycleException();
 			else {
 				for(int i = 0; i < capacity; i++) {
 					if ((parkingSlots[i].getType()).equals(type)) {
+						user.TimeOfLastRenting = MyVelib.getClock().getTime();
 						nbRent ++;
-						user.getCurrentRide().setBicycleRideStart();
 						Bicycle temp = parkingSlots[i];
 						parkingSlots[i] = null;
 						return temp;
-	
 					}
 				}
 				

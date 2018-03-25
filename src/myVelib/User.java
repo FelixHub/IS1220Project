@@ -3,6 +3,8 @@ package myVelib;
 import myVelib.Card.Card;
 
 public class User {
+	
+	
 	String name;
 	GPS position;
 	Card userCard;
@@ -13,8 +15,11 @@ public class User {
 	double chargesAmount;
 	static int count_ID;
 	Ride currentRide;
-
+	public long TimeOfLastRenting;
+	public Boolean possessBicycle;
+	
 	public User(String name, GPS position, Card card) {
+		this.possessBicycle = false;
 		this.name = name;
 		this.position = position;
 		this.userCard = card;
@@ -25,6 +30,7 @@ public class User {
 		this.ID = count_ID;
 		User.count_ID ++;
 		this.currentRide = null;
+		long TimeOfLastRenting=0;
 	}
 	
 	public String getName() {

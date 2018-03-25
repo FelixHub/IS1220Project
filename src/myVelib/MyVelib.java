@@ -11,7 +11,7 @@ public class MyVelib {
 
 	private ArrayList<Station> stations=new ArrayList<Station>();
 	private ArrayList<User> users = new ArrayList<User>();
-	private MyClock clock;
+	static MyClock clock;
 	private double [][] distanceMap;
 
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers) {
@@ -40,7 +40,7 @@ public class MyVelib {
 	public ArrayList<User> getUsers() {
 		return users;
 	}
-	public MyClock getClock() {
+	public static MyClock getClock() {
 		return clock;
 	}
 	public void addUser(String name,Card cT) {
