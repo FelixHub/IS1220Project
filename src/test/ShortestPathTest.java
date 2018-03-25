@@ -11,13 +11,7 @@ class ShortestPathTest {
 
 	@Test
 	void testPath() {
-		GPS start=new GPS(2,3);
-		GPS end = new GPS()
-		
-		
-		ShortestPath stationFinder =new ShortestPath();
-		
-		stationFinder.path(start, end, velibNW, type);
+		fail("Not yet implemented");
 	}
 
 	@Test
