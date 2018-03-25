@@ -48,9 +48,9 @@ public class MyVelib {
 	public MyVelib(int nStations, int mParkingSpot) {
 		
 		StationFactory factory = new StationFactory();
-		for (int i=1; i<=nStations;i++) {
+		for (int i=1; i<=nStations*0.2;i++) {
 			GPS gi=new GPS(10000);
-			
+			Station sPlusi=new PlusStation(gi,Math.floor(a))
 			
 		}
 		
