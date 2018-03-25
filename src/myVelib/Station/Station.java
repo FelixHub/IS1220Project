@@ -13,7 +13,10 @@ import myVelib.Bicycle.ElectricBicycle;
 import myVelib.Bicycle.MechanicalBicycle;
 import myVelib.Misc.GPS;
 import myVelib.Misc.User;
-
+/**
+ * a class representing a station in a myVelib system.
+ * 
+ */
 public abstract class Station extends Observable {
 	
 	
@@ -21,7 +24,7 @@ public abstract class Station extends Observable {
 	GPS position;
 	int ID;
 	String state;
-	String type;
+	String type; 
 	Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
@@ -32,7 +35,7 @@ public abstract class Station extends Observable {
 	ArrayList<Observer> incomingRides;
 	
 	public void removeObserver(Observer observer) {
-		incomingRides.remove(observer);
+		incomingRides.remove(observer); 
 	}
 	public void addObserver(Observer observer) {
 		incomingRides.add(observer);

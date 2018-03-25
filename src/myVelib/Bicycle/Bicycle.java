@@ -1,6 +1,11 @@
 package myVelib.Bicycle;
 
 import java.util.Random;
+/**
+ * 
+ * the abstract class bicycle has two subclasses ElectricBicycle and MechanicalBicycle.
+ * 
+ */
 
 public abstract class Bicycle {
 	protected int ID;
@@ -8,15 +13,24 @@ public abstract class Bicycle {
 	protected BicycleType type;
 	
 	public int getID() {
+		/**
+		 *  return the ID of the Bicycle, which is unique.
+		 */
 		return ID;
 	}
 	
 	public BicycleType getType() {
+		/**
+		 * return the type of the bicycle, ELECTRIC or MECHANICAL.
+		 */
 		return type;
 	}
-	
-	// pour créer aléatoirement des vélos à l'initialisation du monde de base)
+
 	public Bicycle() {
+		/**
+		 * this constructor is only to be used at the initialization of a myVelib world. 
+		 * It randomly generate 70% mechanical bicycle and 30% electrical Bicycle as asked in the project description.
+		 */
 		Random rn = new Random();
 		int randomNum = rn.nextInt(10);
 		if ( randomNum < 8 ) {

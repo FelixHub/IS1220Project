@@ -1,5 +1,8 @@
 package myVelib.Bicycle;
-
+/**
+ * 
+ * class of electric bike, in application of the Factory design pattern
+ */
 public class ElectricBicycle extends Bicycle {
 	
 	public ElectricBicycle(){

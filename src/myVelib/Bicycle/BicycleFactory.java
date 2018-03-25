@@ -1,4 +1,9 @@
 package myVelib.Bicycle;
+/**
+ * 
+ * factory for creating bicycle hidden from the bicycle class.
+ *
+ */
 
 public class BicycleFactory {
 	

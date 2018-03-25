@@ -9,6 +9,7 @@ import myVelib.Misc.GPS;
 public class PlusStation extends Station {
 	
 	public PlusStation(GPS position, int capacity) {
+		
 		super();
 		this.position = position;
 		this.ID = Station.count_ID;
