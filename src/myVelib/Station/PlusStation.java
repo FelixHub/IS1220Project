@@ -8,7 +8,7 @@ import myVelib.Bicycle.Bicycle;
 
 public class PlusStation extends Station {
 	
-	public PlusStation(GPS position, String state, int capacity) {
+	public PlusStation(GPS position, int capacity) {
 		super();
 		this.position = position;
 		this.ID = Station.count_ID;
@@ -17,7 +17,7 @@ public class PlusStation extends Station {
 		this.parkingSlots = new Bicycle[capacity];
 		this.nbRent = 0;
 		this.nbReturn = 0;
-		this.state = state;
+		this.state = "ONSERVICE";
 		this.type = "PLUS";
 		this.incomingRides = new ArrayList<Observer>();
 		this.occupationRecord = new long[capacity][2];

@@ -37,8 +37,9 @@ public abstract class Station extends Observable {
 	public void addObserver(Observer observer) {
 		incomingRides.add(observer);
 	}
+	
 	public void notifyObserver() {
-		if (freeParkingSpotsNb() == 0){
+		if ( (freeParkingSpotsNb() == 0) || (state.equals("OFFLINE")) ){
 			for (Observer ob : incomingRides) {
 				ob.update(this,this.ID);
 			}
@@ -51,9 +52,10 @@ public abstract class Station extends Observable {
 	class UserAlreadyHaveBicycleException extends Exception{}
 
 	
-	public void parkBicycle(Bicycle bicycle, User user) throws FullStationException {
+	public void parkBicycle(Bicycle bicycle, User user) throws FullStationException, OffLineStationException {
 		try {
 			if(freeParkingSpotsNb() == 0) throw new FullStationException();
+			else if (state.equals("OFFLINE")) throw new OffLineStationException();
 			else {
 				for(int i = 0; i < capacity; i++) {
 					if (parkingSlots[i] == null) {
@@ -77,10 +79,11 @@ public abstract class Station extends Observable {
 		} catch(FullStationException e) { System.out.println("there's no more parking spot at station"+ID);}
 	}
 	
-	public Bicycle takeBicycle(BicycleType type, User user) throws EmptyStationException, UserAlreadyHaveBicycleException {
+	public Bicycle takeBicycle(BicycleType type, User user) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException {
 		try {
 			if (countBicycle(type) == 0) throw new EmptyStationException();
-			if (user.possessBicycle) throw new UserAlreadyHaveBicycleException();
+			else if (user.possessBicycle) throw new UserAlreadyHaveBicycleException();
+			else if (state.equals("OFFLINE")) throw new OffLineStationException();
 			else {
 				for(int i = 0; i < capacity; i++) {
 					if ((parkingSlots[i].getType()).equals(type)) {
@@ -150,6 +153,14 @@ public abstract class Station extends Observable {
 	}
 	public void setParkingSlots(Bicycle[] parkingSlots) {
 		this.parkingSlots = parkingSlots;
+	}
+	
+	public void putOffLine() {
+		state = "OFFLINE";
+		notifyObserver();
+	}
+	public void putOnline() {
+		state = "ONSERVICE";
 	}
 	
 	public float averageRateOfOccupation() {
