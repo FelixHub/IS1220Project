@@ -20,7 +20,11 @@ public class MyVelib {
 	private static MyClock clock;
 	private double [][] distanceMap;
 	
-
+	/**
+	 * 
+	 * @param listOfStations
+	 * @param listOfUsers
+	 */
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers) {
 		
 		this.stations=listOfStations;
