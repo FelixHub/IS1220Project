@@ -3,6 +3,10 @@ package myVelib;
 import java.util.Observable;
 import java.util.Observer;
 
+import PathAlgorithm.AlgType;
+import PathAlgorithm.FastestPath;
+import PathAlgorithm.PathFinder;
+import PathAlgorithm.ShortestPath;
 import myVelib.Bicycle.Bicycle;
 import myVelib.Bicycle.BicycleFactory;
 import myVelib.Bicycle.BicycleType;

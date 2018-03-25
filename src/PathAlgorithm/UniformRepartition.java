@@ -1,5 +1,7 @@
-package myVelib;
+package PathAlgorithm;
 
+import myVelib.GPS;
+import myVelib.MyVelib;
 import myVelib.Bicycle.BicycleType;
 import myVelib.Station.Station;
 
