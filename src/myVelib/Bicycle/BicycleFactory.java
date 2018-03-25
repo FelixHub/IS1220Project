@@ -2,7 +2,7 @@ package myVelib.Bicycle;
 
 public class BicycleFactory {
 	
-	public Bicycle createBicycle(String type) {
+	public static Bicycle createBicycle(String type) {
 		if (type.equalsIgnoreCase("ELECTRIC")) {
 			return new ElectricBicycle();
 		}
