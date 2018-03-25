@@ -7,7 +7,7 @@ import myVelib.Station.Station;
 public interface PathFinder {
 
 	
-	void Path(GPS start,GPS end, MyVelib velibNW, Bicycle bicycle);
+	void path(GPS start,GPS end, MyVelib velibNW, BicycleType type);
 	Station getStartStation();
 	Station getEndStation();
 

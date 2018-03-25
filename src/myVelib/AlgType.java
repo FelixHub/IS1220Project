@@ -1,6 +1,6 @@
 package myVelib;
 
 public enum AlgType {
-	SP,SP
+	SHORTEST,FASTEST,AVOIDPLUS,PREFERPLUS,UNIFORM
 
 }

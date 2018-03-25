@@ -19,12 +19,19 @@ public class Ride implements Observer{
 
 	
 	
-	public Ride(GPS start, GPS end, PathFinder path, String type, MyVelib velibNW) {
+	public Ride(GPS start, GPS end, String type, MyVelib velibNW) {
 		
 		this.start=start;
 		this.end=end;
 		this.velibNW=velibNW;
-		this.path = path;
+		if(algType.equals(AlgType.SHORTEST)) {
+			this.path = new ShortestPath();
+		}
+		if(algType.equals(AlgType.FASTEST)) {
+			this.path = new FastestPath();
+		}
+		
+		path.path(start, end, velibNW, bicycle.getType());
 		this.bicycle = BicycleFactory.createBicycle(type);
 		//this.path.getStartStation() c'est la syntaxe pour avoir la station d'arrivée pour pouvoir faire add Observer et tout
 
@@ -33,9 +40,7 @@ public class Ride implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		if (this.algType=="Shortest"){
-				path = new ShortestPath.Path(start,end,velibNW,bicycle.getType());
-		}
+			path.path(start,end,velibNW,bicycle.getType());
 		
 	}
 }
