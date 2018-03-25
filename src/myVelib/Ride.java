@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import myVelib.Bicycle.Bicycle;
+import myVelib.Bicycle.BicycleType;
 import myVelib.Station.Station;
 
 public class Ride implements Observer{
@@ -17,17 +18,17 @@ public class Ride implements Observer{
 	long bicycleRideEnd;
 	
 	
-	public Ride(GPS start, GPS end, PathFinder path, Bicycle bycicle, MyVelib velibNW) {
+	public Ride(GPS start, GPS end, PathFinder path, BicycleType type, MyVelib velibNW) {
 		
 		this.start=start;
 		this.end=end;
 		this.velibNW=velibNW;
 		this.path = path;
-		this.bicycle = bycicle;
+		this.bicycle = bicycle;
 		this.bicycleRideStart = 0;
 		this.bicycleRideEnd = 0;
 		//this.path.getStartStation() c'est la syntaxe pour avoir la station d'arrivée pour pouvoir faire add Observer et tout
-		//Pcque qu'on veut la surveiller
+
 		
 	}
 	
