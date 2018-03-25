@@ -10,7 +10,7 @@ public class MyClock {
 
     public long getTime()
     {
-        return ((System.currentTimeMillis() - offset));
+        return ((System.currentTimeMillis() - offset)*60/1000);
     }
     
     
