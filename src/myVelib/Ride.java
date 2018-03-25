@@ -11,6 +11,7 @@ public class Ride implements Observer{
 
 	GPS start;
 	GPS end;
+	String algType;
 	PathFinder path;
 	Bicycle bicycle;
 	MyVelib velibNW;
@@ -55,6 +56,9 @@ public class Ride implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		path = new PathFinder(start,end,velibNW,bicycle.getType());
+		if (this.algType=="Shortest"){
+				path = new ShortestPath.Path(start,end,velibNW,bicycle.getType());
+		}
+		
 	}
 }
