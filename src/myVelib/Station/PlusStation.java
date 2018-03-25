@@ -5,11 +5,15 @@ import java.util.Observer;
 
 import myVelib.Bicycle.Bicycle;
 import myVelib.Misc.GPS;
-
+/**
+ * a class representing a plus station with integrated constructor
+ */
 public class PlusStation extends Station {
-	
+	/**
+	 * @param capacity is the number of parkingSlot of the Station
+	 * @
+	 */
 	public PlusStation(GPS position, int capacity) {
-		
 		super();
 		this.position = position;
 		this.ID = Station.count_ID;

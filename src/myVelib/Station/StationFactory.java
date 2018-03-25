@@ -1,6 +1,11 @@
 package myVelib.Station;
 
 import myVelib.Misc.GPS;
+/**
+ * 
+ *  a factory class to create different type of stations
+ *
+ */
 
 public class StationFactory {
 	

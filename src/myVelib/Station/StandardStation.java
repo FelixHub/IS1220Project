@@ -1,4 +1,7 @@
 package myVelib.Station;
+/**
+ * a class representing a standard station with integrated constructor
+ */
 
 import java.util.ArrayList;
 import java.util.Observer;

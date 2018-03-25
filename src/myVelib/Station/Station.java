@@ -15,6 +15,9 @@ import myVelib.Misc.GPS;
 import myVelib.Misc.User;
 /**
  * a class representing a station in a myVelib system.
+ * This is a subclass of Observable because we implement here an Observer pattern :
+ * a station is observed by the Ride classes for whom it is their EndStation. 
+ * The Ride classes are notified if the station is put OFFLINE or if it become FULL.
  * 
  */
 public abstract class Station extends Observable {
@@ -23,13 +26,27 @@ public abstract class Station extends Observable {
 	
 	GPS position;
 	int ID;
+	/**
+	 * the state of the station is "OFFLINE" or "ONSERVICE".
+	 */
 	String state;
+	/**
+	 * the type of the station is "PLUS" or "STANDARD".
+	 */
 	String type; 
+	/**
+	 * Parking slots are represented by the index of an array of length the number of  station's parkingSpot
+	 */
 	Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
 	int nbReturn;
 	static int count_ID;
+	/**
+	 * to make the average occupation time statistic, we keep udapted a two dimensionnal array wich contain :
+	 * - total time the i-eme parkingSpot was occupied in first line
+	 * - last time a bicycle was park in the i-eme parkingSpot 
+	 */
 	long[][] occupationRecord;
 	
 	ArrayList<Observer> incomingRides;
@@ -69,6 +86,7 @@ public abstract class Station extends Observable {
 						user.addCharges( user.getUserCard().rideCost(
 								returnTime - user.TimeOfLastRenting,bicycle));
 						user.ridesNb ++;
+						removeObserver(user.getCurrentRide());
 						user.setCurrentRide(null);
 						if ((this.type).equalsIgnoreCase("PLUS")){
 							user.getUserCard().setTimeCredit(user.getUserCard().getTimeCredit()+5);
@@ -80,6 +98,7 @@ public abstract class Station extends Observable {
 				}
 			} 
 		} catch(FullStationException e) { System.out.println("there's no more parking spot at station"+ID);}
+		  catch(OffLineStationException e) {System.out.println("this station is offline, you can't park here");}
 	}
 	
 	public Bicycle takeBicycle(BicycleType type, User user) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException {
@@ -95,12 +114,14 @@ public abstract class Station extends Observable {
 						nbRent ++;
 						Bicycle temp = parkingSlots[i];
 						parkingSlots[i] = null;
+						user.getCurrentRide().setBicycle(temp);
 						return temp;
 					}
 				}
 				
 			}
-		} catch(EmptyStationException e ) {System.out.println("the desired bicycle type is not available at station"+ID);}
+		}catch(UserAlreadyHaveBicycleException e) {System.out.println("You can't rent two bikes at the same time.");}
+		 catch(EmptyStationException e ) {System.out.println("the desired bicycle type is not available at station"+ID);}
 	return null;
 	}
 	

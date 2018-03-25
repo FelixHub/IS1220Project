@@ -14,7 +14,7 @@ public class User {
 	int ID;
 	double chargesAmount;
 	static int count_ID;
-	Ride currentRide;
+	public Ride currentRide;
 	public long TimeOfLastRenting;
 	public Boolean possessBicycle;
 	
