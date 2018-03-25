@@ -82,7 +82,7 @@ public class MyVelib {
 				least = station.averageRateOfOccupation();
 			}
 		}
-		
+		 
 		return leastID;
 	}
 

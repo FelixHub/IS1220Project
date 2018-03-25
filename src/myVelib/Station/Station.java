@@ -175,5 +175,5 @@ public abstract class Station extends Observable {
 		s = s/(ts*capacity);
 		return s;
 	}
-
+ 
 }
