@@ -25,7 +25,7 @@ public class PreferPlus implements PathFinder {
 		double de=0;
 		for (int i=0; i<velibNW.getStations().size() ;i++) {
 			
-			double di = Math.sqrt((start.getX()-velibNW.getStations().get(i).getPosition().getX())^2+(start.getY()-velibNW.getStations().get(i).getPosition().getY())^2);
+			double di = Math.sqrt(Math.pow(start.getX()-velibNW.getStations().get(i).getPosition().getX(),2)+Math.pow(start.getY()-velibNW.getStations().get(i).getPosition().getY(),2));
 			
 			if((ds==0) || ((di < ds) 
 					&& (velibNW.getStations().get(i).countBicycle(type)!=0)
@@ -37,7 +37,7 @@ public class PreferPlus implements PathFinder {
 		}
 		for (int j=0; j<velibNW.getStations().size() ;j++) {
 			
-			double dj = Math.sqrt((end.getX()-velibNW.getStations().get(j).getPosition().getX())^2+(end.getY()-velibNW.getStations().get(j).getPosition().getY())^2);
+			double dj = Math.sqrt(Math.pow(end.getX()-velibNW.getStations().get(j).getPosition().getX(),2)+Math.pow(end.getY()-velibNW.getStations().get(j).getPosition().getY(),2));
 
 			if((de==0) || ((dj < de) 
 					&& (velibNW.getStations().get(j).freeParkingSpotsNb()!=0)

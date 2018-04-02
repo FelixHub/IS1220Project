@@ -24,6 +24,7 @@ public abstract class Bicycle {
 		 * return the type of the bicycle, ELECTRIC or MECHANICAL.
 		 */
 		return type;
+		
 	}
 
 	public static Bicycle randomBicycle() {

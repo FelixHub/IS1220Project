@@ -67,7 +67,7 @@ public class Ini {
 		
 		
 		GPS randomGPS = new GPS(cityDimension);
-		users.get(0).setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.FASTEST));
+		users.get(0).setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.PREFERPLUS));
 		User bruce = users.get(0);
 		
 		for(int i = 0; i< cityDimension; i ++) {
