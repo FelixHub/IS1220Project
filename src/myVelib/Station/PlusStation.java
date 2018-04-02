@@ -19,7 +19,7 @@ public class PlusStation extends Station {
 		this.ID = Station.count_ID;
 		Station.count_ID ++ ;
 		this.capacity = capacity;
-		this.setParkingSlots(new Bicycle[capacity]);
+		this.parkingSlots = new Bicycle[capacity];
 		for(int i = 0; i<capacity ; i++) {
 			getParkingSlots()[i] = null;
 		}

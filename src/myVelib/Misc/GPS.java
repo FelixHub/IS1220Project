@@ -28,4 +28,8 @@ public class GPS {
 		this.y=r.nextInt(sup);
 		
 	}
+	
+	public String toString() {
+		return "("+x+","+y+")";
+	}
 }

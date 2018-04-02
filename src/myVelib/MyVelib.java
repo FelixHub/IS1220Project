@@ -18,7 +18,7 @@ import java.lang.Math;
 
 public class MyVelib {
 
-	private ArrayList<Station> stations=new ArrayList<Station>();
+	ArrayList<Station> stations=new ArrayList<Station>();
 	private ArrayList<User> users = new ArrayList<User>();
 	private static MyClock clock;
 	private double [][] distanceMap;
@@ -38,9 +38,9 @@ public class MyVelib {
 		int j = 0;
 		for (Station si : stations)  {
 			for (Station sj : stations) {
-				System.out.println(i+" "+j);
-				distanceMap[i][j] = Math.sqrt((si.getPosition().getX()-sj.getPosition().getX())^2+(si.getPosition().getY()-sj.getPosition().getY())^2);
-				j++;
+				distanceMap[i][j] = Math.sqrt( Math.pow(si.getPosition().getX()-sj.getPosition().getX(),2)
+									+ Math.pow(si.getPosition().getY()-sj.getPosition().getY(), 2) );
+			j++;
 			}
 			j = 0;
 			i++;

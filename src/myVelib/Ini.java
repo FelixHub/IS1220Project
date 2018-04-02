@@ -1,5 +1,6 @@
 package myVelib;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,14 +10,18 @@ import myVelib.Bicycle.MechanicalBicycle;
 import myVelib.Card.Card;
 import myVelib.Card.VLIBRE_Card;
 import myVelib.Misc.GPS;
+import myVelib.Misc.Ride;
 import myVelib.Misc.User;
+import myVelib.PathAlgorithm.AlgType;
+import myVelib.PathAlgorithm.PathFinder;
 import myVelib.Station.PlusStation;
 import myVelib.Station.StandardStation;
 import myVelib.Station.Station;
 public class Ini {
 	
 	public static void main(String[] args) {
-
+		
+		int cityDimension = 20;
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
 		System.out.println("How many stations do you want in the city ?");
 		int n = reader.nextInt(); 
@@ -30,7 +35,7 @@ public class Ini {
 		ArrayList<User> users = new ArrayList<User>();
 		
 		for(int i = 0; i<n;i++) {
-			GPS gps = new GPS(1000);
+			GPS gps = new GPS(cityDimension);
 			Random rn = new Random();
 			int randomNum = rn.nextInt(2);
 			Station s;
@@ -51,12 +56,53 @@ public class Ini {
 		}
 		
 		for(int i = 0; i<nbUser ; i++) {
-			GPS gps = new GPS(1000);
+			GPS gps = new GPS(cityDimension);
 			Card card = Card.randomCard();
 			users.add(new User("RandomGuy", gps, card));
 		}
+		for(int i = 0; i<m;i++) {
+		//System.out.println(stations.get(0).getParkingSlots()[i]);
+		}
 		MyVelib myVelib = new MyVelib(stations,users);
-		System.out.println(myVelib.getStations());
+		
+		
+		GPS randomGPS = new GPS(cityDimension);
+		users.get(0).setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.FASTEST));
+		User bruce = users.get(0);
+		
+		for(int i = 0; i< cityDimension; i ++) {
+			String s = "";
+			for(int j = 0; j < cityDimension; j ++) {
+				boolean flag = true;
+				if ( ( bruce.getPosition().getX() == j) && (bruce.getPosition().getY() == i)){
+					flag = false;
+					s = s + "S ";
+				}
+				else if ( ( randomGPS.getX() == j) && (randomGPS.getY() == i)){
+					flag = false;
+					s = s + "E ";
+				}
+				else{
+					for(Station station : myVelib.stations) {
+
+					if ( ( station.getPosition().getX() == j) && (station.getPosition().getY() == i)) {
+						s = s + station.getID()+" ";
+						flag = false;
+						break;
+						}
+					}
+				}
+				if (flag) {s = s + "# ";}
+			}
+			System.out.println(s);
+		}
+		
+		System.out.println("startPosition: "+bruce.getPosition() );
+		System.out.println("EndPosition: "+ randomGPS );
+		System.out.println("StartStation: "+bruce.currentRide.getRidePath().getStartStation());
+		System.out.println("EndStation: "+ bruce.currentRide.getRidePath().getEndStation());
 	}
 
 }
+
+

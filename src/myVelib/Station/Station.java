@@ -37,7 +37,7 @@ public abstract class Station extends Observable {
 	/**
 	 * Parking slots are represented by the index of an array of length the number of  station's parkingSpot
 	 */
-	private Bicycle[] parkingSlots;
+	protected Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
 	int nbReturn;
@@ -131,8 +131,11 @@ public abstract class Station extends Observable {
 	
 	public int countBicycle(BicycleType type) {
 		int t = 0;
-		for(Bicycle slot : getParkingSlots()) {
-			if ((slot.getType()).equals(type)) {
+		for(Bicycle slot : parkingSlots) {
+			if(slot == null) {
+				continue;
+			}
+			else if ((slot.getType()).equals(type)) {
 				t ++;
 			}
 		}
@@ -212,7 +215,7 @@ public abstract class Station extends Observable {
 		return parkingSlots;
 	}
 	public String toString() {
-		return "this is a " + type + " station, of ID "+getID()+".";
+		return  type + "station"+getID();
 	}
  
 }
