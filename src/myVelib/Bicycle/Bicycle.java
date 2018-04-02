@@ -26,7 +26,7 @@ public abstract class Bicycle {
 		return type;
 	}
 
-	public Bicycle() {
+	public static Bicycle randomBicycle() {
 		/**
 		 * this constructor is only to be used at the initialization of a myVelib world. 
 		 * It randomly generate 70% mechanical bicycle and 30% electrical Bicycle as asked in the project description.
@@ -34,10 +34,10 @@ public abstract class Bicycle {
 		Random rn = new Random();
 		int randomNum = rn.nextInt(10);
 		if ( randomNum < 8 ) {
-			new MechanicalBicycle();
+			return new MechanicalBicycle();
 		}
 		else {
-			new ElectricBicycle();
+			return new ElectricBicycle();
 		}
 	}
 }

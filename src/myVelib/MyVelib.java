@@ -38,22 +38,13 @@ public class MyVelib {
 		int j = 0;
 		for (Station si : stations)  {
 			for (Station sj : stations) {
+				System.out.println(i+" "+j);
 				distanceMap[i][j] = Math.sqrt((si.getPosition().getX()-sj.getPosition().getX())^2+(si.getPosition().getY()-sj.getPosition().getY())^2);
 				j++;
 			}
+			j = 0;
 			i++;
 		}
-	}
-	
-	public MyVelib(int nStations, int mParkingSpot) {
-		
-		StationFactory factory = new StationFactory();
-		for (int i=1; i<=nStations;i++) {
-			GPS gi=new GPS(10000);
-			
-			
-		}
-		
 	}
 	
 	
@@ -62,8 +53,6 @@ public class MyVelib {
 
 	}
 	
-
-	
 	public ArrayList<User> getUsers() {
 		return users;
 	}
@@ -71,12 +60,7 @@ public class MyVelib {
 		return clock;
 	}
 	public void addUser(String name,Card cT) {
-		
 	}
-	public void addStation(String nam) {
-		
-	}
-	
 
 
 	public ArrayList<Station> getStations() {

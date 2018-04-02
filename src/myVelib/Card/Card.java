@@ -37,7 +37,7 @@ public abstract class Card {
 		timeCredit = time;
 	}
 	
-	public void card() {
+	public static Card randomCard() {
 		/**
 		 * this constructor is only to be used at the initialization of a myVelib world. 
 		 *  as proposed in the setting up paragraph, it randomly create one of the three possible kind of Card.
@@ -45,13 +45,13 @@ public abstract class Card {
 		Random rn = new Random();
 		int randomNum = rn.nextInt(3);
 		if (randomNum == 0) {
-			new VLIBRE_Card();
+			return new VLIBRE_Card();
 		}
 		else if (randomNum == 1){
-			new VMAX_Card();
+			return new VMAX_Card();
 		}
 		else {
-			new NoCard();
+			return new NoCard();
 		}
 	}
 }
