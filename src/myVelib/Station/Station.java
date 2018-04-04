@@ -33,7 +33,7 @@ public abstract class Station extends Observable {
 	/**
 	 * the type of the station is "PLUS" or "STANDARD".
 	 */
-	String type; 
+	public String type; 
 	/**
 	 * Parking slots are represented by the index of an array of length the number of  station's parkingSpot
 	 */
@@ -69,10 +69,10 @@ public abstract class Station extends Observable {
 		}
 	}
 	
-	class FullStationException extends Exception{}
-	class EmptyStationException extends Exception{}
-	class OffLineStationException extends Exception{}
-	class UserAlreadyHaveBicycleException extends Exception{}
+	public class FullStationException extends Exception{}
+	public class EmptyStationException extends Exception{}
+	public class OffLineStationException extends Exception{}
+	public class UserAlreadyHaveBicycleException extends Exception{}
 
 	
 	public void parkBicycle(Bicycle bicycle, User user) throws FullStationException, OffLineStationException {
@@ -111,7 +111,10 @@ public abstract class Station extends Observable {
 			else if (state.equals("OFFLINE")) throw new OffLineStationException();
 			else {
 				for(int i = 0; i < capacity; i++) {
-					if ((getParkingSlots()[i].getType()).equals(type)) {
+					if(parkingSlots[i] == null) {
+						continue;
+					}
+					if (parkingSlots[i].getType() == type ) {
 						user.TimeOfLastRenting = MyVelib.getClock().getTime();
 						occupationRecord[i][0] = occupationRecord[i][0] + (user.TimeOfLastRenting - occupationRecord[i][1]);
 						nbRent ++;

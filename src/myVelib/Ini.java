@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import myVelib.Bicycle.Bicycle;
+import myVelib.Bicycle.BicycleType;
 import myVelib.Bicycle.ElectricBicycle;
 import myVelib.Bicycle.MechanicalBicycle;
 import myVelib.Card.Card;
@@ -17,9 +18,13 @@ import myVelib.PathAlgorithm.PathFinder;
 import myVelib.Station.PlusStation;
 import myVelib.Station.StandardStation;
 import myVelib.Station.Station;
+import myVelib.Station.Station.EmptyStationException;
+import myVelib.Station.Station.FullStationException;
+import myVelib.Station.Station.OffLineStationException;
+import myVelib.Station.Station.UserAlreadyHaveBicycleException;
 public class Ini {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException, FullStationException, InterruptedException {
 		
 		int cityDimension = 20;
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
@@ -60,49 +65,68 @@ public class Ini {
 			Card card = Card.randomCard();
 			users.add(new User("RandomGuy", gps, card));
 		}
-		for(int i = 0; i<m;i++) {
-		//System.out.println(stations.get(0).getParkingSlots()[i]);
-		}
 		MyVelib myVelib = new MyVelib(stations,users);
 		
+		for (User user : myVelib.getUsers()) {
+			GPS randomGPS = new GPS(cityDimension);
+			user.setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.FASTEST));
+			user.getCurrentRide().getRidePath().getStartStation().takeBicycle(BicycleType.MECHANICAL, user);
+			Thread.sleep(1000);
+			displayRide(user.currentRide,user,cityDimension);
+			user.getCurrentRide().getRidePath().getEndStation().parkBicycle(user.getCurrentRide().getBicycle(),user);
+		}
 		
-		GPS randomGPS = new GPS(cityDimension);
-		users.get(0).setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.PREFERPLUS));
-		User bruce = users.get(0);
+		for(Station s : myVelib.getStations()) {
+			System.out.println(s.getID()+" "+s.averageRateOfOccupation()+ "  "+ s.getNbRent() +"  "+ s.getNbReturn());
+		}
 		
+		System.out.println(myVelib.mostUsedStation());
+		System.out.println(myVelib.leastOccupiedStation());
+		System.out.println(MyVelib.getClock().getTime());
+		for(User user: myVelib.getUsers()) {
+			System.out.println(user.ridesNb) ;
+		}
+		
+	}
+	public static void displayRide(Ride ride,User u, int cityDimension) {
 		for(int i = 0; i< cityDimension; i ++) {
 			String s = "";
 			for(int j = 0; j < cityDimension; j ++) {
 				boolean flag = true;
-				if ( ( bruce.getPosition().getX() == j) && (bruce.getPosition().getY() == i)){
+				if ( ( u.getPosition().getX() == j) && (u.getPosition().getY() == i)){
 					flag = false;
-					s = s + "S ";
+					s = s + "S  ";
 				}
-				else if ( ( randomGPS.getX() == j) && (randomGPS.getY() == i)){
+				else if ( (ride.getEnd().getX() == j) && (ride.getEnd().getY() == i)){
 					flag = false;
-					s = s + "E ";
+					s = s + "E  ";
 				}
 				else{
-					for(Station station : myVelib.stations) {
+					for(Station station : ride.getVelibNW().stations) {
 
 					if ( ( station.getPosition().getX() == j) && (station.getPosition().getY() == i)) {
-						s = s + station.getID()+" ";
+						if (station.type == "PLUS") {
+							s = s + station.getID()+"P ";
+						}
+						else {
+							s = s + station.getID()+"N ";
+						}
 						flag = false;
 						break;
 						}
 					}
 				}
-				if (flag) {s = s + "# ";}
+				if (flag) {s = s + "#  ";}
 			}
 			System.out.println(s);
 		}
+		System.out.println("startPosition: "+u.getPosition() );
+		System.out.println("EndPosition: "+ ride.getEnd() );
+		System.out.println("StartStation: "+u.currentRide.getRidePath().getStartStation());
+		System.out.println("EndStation: "+ u.currentRide.getRidePath().getEndStation());
 		
-		System.out.println("startPosition: "+bruce.getPosition() );
-		System.out.println("EndPosition: "+ randomGPS );
-		System.out.println("StartStation: "+bruce.currentRide.getRidePath().getStartStation());
-		System.out.println("EndStation: "+ bruce.currentRide.getRidePath().getEndStation());
 	}
-
+	
 }
 
 
