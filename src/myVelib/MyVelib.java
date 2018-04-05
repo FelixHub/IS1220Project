@@ -94,7 +94,9 @@ public class MyVelib {
 		}
 	}
 	
+
 	
+
 	public double[][] getDistanceMap() {
 		return distanceMap;
 
