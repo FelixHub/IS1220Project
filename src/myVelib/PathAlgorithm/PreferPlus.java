@@ -9,7 +9,7 @@ import myVelib.Station.Station;
 
 /**
  * 
- * It implements PathFinder in order to find Start/EndStation with the shortest path algorithm and the prefer plus option.
+ * It implements PathFinder in order to find Start/EndStation which are the closest to startGPS .
  *
  */
 public class PreferPlus implements PathFinder {
@@ -59,21 +59,27 @@ public class PreferPlus implements PathFinder {
 		
 		//on recalcule EndStation en checkant dans un rayon 1.1 fois plus grand , au cas où une PlusStation s'y trouve.
 		
-		double d=0;
+		double dmin=0;
+		int kmin=0;
+		int count=0;
 		for (int k=0; k<velibNW.getStations().size() ;k++) {
 			
 			double dk = Math.sqrt((end.getX()-velibNW.getStations().get(k).getPosition().getX())^2+(end.getY()-velibNW.getStations().get(k).getPosition().getY())^2);
 		
-			if ((d==0) || ((dk < d) && (d<=1.1*de)
+			if ((dmin==0) || ((dk < dmin) && (dmin<=1.1*de)
 					&& (velibNW.getStations().get(k).freeParkingSpotsNb()!=0)
 					&& (velibNW.getStations().get(k).getState()=="ONSERVICE")
 					&& (velibNW.getStations().get(k) instanceof PlusStation))) {
 				
-				d=dk;
-				endS=velibNW.getStations().get(k);
+				dmin=dk;
+				kmin =k;
+				count++;
 			}
-			
 		}
+		if (count !=1) {
+			endS=velibNW.getStations().get(kmin);
+		}
+		
 		
 		this.startStation=startS;
 		this.endStation=endS;

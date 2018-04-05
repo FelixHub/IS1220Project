@@ -26,6 +26,10 @@ public class GPS {
 		this.y = y;
 	}
 	
+	/**
+	 * generates a random GPS in a squared grid of size "sup".
+	 * @param sup
+	 */
 	public GPS(int sup) {
 		Random r = new Random();
 		this.x =r.nextInt(sup);
