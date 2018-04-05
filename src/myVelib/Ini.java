@@ -72,7 +72,7 @@ public class Ini {
 			users.add(new User("RandomGuy", gps, card));
 		}
 		*/
-		MyVelib myVelib = new MyVelib(stations,users);
+		MyVelib myVelib = new MyVelib(stations,users,cityDimension);
 		
 		/*
 		for (User user : myVelib.getUsers()) {

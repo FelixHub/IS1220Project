@@ -30,6 +30,7 @@ public class MyVelib {
 	private ArrayList<User> users = new ArrayList<User>();
 	private static MyClock clock;
 	private double [][] distanceMap;
+	private int cityDimension;
 	
 	/**
 	 * 
@@ -71,12 +72,13 @@ public class MyVelib {
 			stations.add(s);
 		}
 		
-		return new MyVelib(stations,users);
+		return new MyVelib(stations,users,cityDimension);
 	}
 	
 	
-	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers) {
+	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers, int cityDimension) {
 		
+		this.cityDimension = cityDimension;
 		this.stations=listOfStations;
 		this.users=listOfUsers;
 		this.clock =new MyClock();
