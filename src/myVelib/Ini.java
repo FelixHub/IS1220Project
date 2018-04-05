@@ -1,6 +1,10 @@
 package myVelib;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,18 +28,20 @@ import myVelib.Station.Station.OffLineStationException;
 import myVelib.Station.Station.UserAlreadyHaveBicycleException;
 public class Ini {
 	
-	public static void main(String[] args) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException, FullStationException, InterruptedException {
+	public static void main(String[] args) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException, FullStationException, InterruptedException, FileNotFoundException, IOException {
 		
-		int cityDimension = 10;
-		Scanner reader = new Scanner(System.in);  // Reading from System.in
-		System.out.println("How many stations do you want in the city ?");
-		int n = reader.nextInt(); 
-		System.out.println("How many parkingSlot by station ?");
-		int m = reader.nextInt();
+			final Properties prop = new Properties();
+			prop.load(new FileInputStream("eval/my_velib.ini"));
+			int cityDimension = Integer.parseInt(prop.getProperty("cityDim"));
+			int n = Integer.parseInt(prop.getProperty("stationsNumber"));
+			int m = Integer.parseInt(prop.getProperty("parkingSlotNumberByStation"));
+		
+		/*
+		Scanner reader = new Scanner(System.in);
 		System.out.println("combien d'usager dans votre ville ?");
 		int nbUser = reader.nextInt();
 		reader.close();
-		
+		*/
 		ArrayList<Station> stations = new ArrayList<Station>();
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -59,20 +65,22 @@ public class Ini {
 			}
 			stations.add(s);
 		}
-		
+		/*
 		for(int i = 0; i<nbUser ; i++) {
 			GPS gps = new GPS(cityDimension);
 			Card card = Card.randomCard();
 			users.add(new User("RandomGuy", gps, card));
 		}
-		MyVelib myVelib = new MyVelib(stations,users);
+		*/
+		MyVelib myVelib = new MyVelib(stations,users,cityDimension);
 		
+		/*
 		for (User user : myVelib.getUsers()) {
 			GPS randomGPS = new GPS(cityDimension);
 			user.setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.SHORTEST));
 			user.getCurrentRide().getRidePath().getStartStation().takeBicycle(BicycleType.MECHANICAL, user);
 			Thread.sleep(1000);
-			displayRide(user.currentRide,user,cityDimension);
+			displayRide(user,cityDimension);
 			user.getCurrentRide().getRidePath().getEndStation().parkBicycle(user.getCurrentRide().getBicycle(),user);
 		}
 		
@@ -86,9 +94,11 @@ public class Ini {
 		for(User user: myVelib.getUsers()) {
 			System.out.println(user.ridesNb) ;
 		}
-		
+		*/
 	}
-	public static void displayRide(Ride ride,User u, int cityDimension) {
+	
+	
+	public static void displayRide(User u, int cityDimension) {
 		for(int i = 0; i< cityDimension; i ++) {
 			String s = "";
 			for(int j = 0; j < cityDimension; j ++) {
@@ -102,7 +112,7 @@ public class Ini {
 					s = s + "E  ";
 				}
 				else{
-					for(Station station : ride.getVelibNW().stations) {
+					for(Station station : u.getCurrentRide().getVelibNW().stations) {
 					if ( ( station.getPosition().getX() == j) && (station.getPosition().getY() == i)) {
 						if(station.getState()=="OFFSERVICE") {
 							s = s + "X  ";
@@ -123,7 +133,7 @@ public class Ini {
 			System.out.println(s);
 		}
 		System.out.println("startPosition: "+u.getPosition() );
-		System.out.println("EndPosition: "+ ride.getEnd() );
+		System.out.println("EndPosition: "+ u.getCurrentRide().getEnd() );
 		System.out.println("StartStation: "+u.currentRide.getRidePath().getStartStation());
 		System.out.println("EndStation: "+ u.currentRide.getRidePath().getEndStation());
 		
