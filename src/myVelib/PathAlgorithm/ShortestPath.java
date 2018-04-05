@@ -7,8 +7,8 @@ import myVelib.Station.Station;
 import java.lang.Math;
 
 /**
+ * It implements PathFinder in order to find Start/EndStation with the shortest path algorithm.
  * 
- * @author Tom
  *
  */
 public class ShortestPath implements PathFinder {
@@ -21,13 +21,14 @@ public class ShortestPath implements PathFinder {
 	public ShortestPath() {
 		super();
 	}
-
+	
 	@Override
 	public void path(GPS start, GPS end, MyVelib velibNW, BicycleType type) {
 		
 		double d=0;
 		Station startS = null;
 		Station endS = null;
+		//calcul de StartStation et EndStation par brute force, les if supplémentaires servent à éviter les cas pathologiques (station pleine, etc..)
 		for (int i=0; i<velibNW.getDistanceMap().length ;i++) {
 			
 			for (int j=0; j< velibNW.getDistanceMap()[i].length ;j++) {

@@ -4,7 +4,11 @@ import myVelib.MyVelib;
 import myVelib.Bicycle.BicycleType;
 import myVelib.Misc.GPS;
 import myVelib.Station.Station;
-
+/**
+ * 
+ * It implements PathFinder in order to find Start/EndStation with the fastest path algorithm.
+ *
+ */
 public class FastestPath implements PathFinder {
 	
 	private Station startStation;
@@ -23,6 +27,8 @@ public class FastestPath implements PathFinder {
 		double t=0;
 		Station startS = null;
 		Station endS = null;
+		//calcul de StartStation et EndStation par brute force, les if supplémentaires servent à éviter les cas pathologiques (station pleine, etc..)
+		// A l'exception que le type de vélo est ici important puisque la vitesse est différente.
 		for (int i=0; i<velibNW.getDistanceMap().length ;i++) {
 			
 			for (int j=0; j< velibNW.getDistanceMap()[i].length ;j++) {

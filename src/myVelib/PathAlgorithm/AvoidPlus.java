@@ -5,7 +5,11 @@ import myVelib.Bicycle.BicycleType;
 import myVelib.Misc.GPS;
 import myVelib.Station.StandardStation;
 import myVelib.Station.Station;
-
+/**
+ * 
+ * It implements PathFinder in order to find Start/EndStation with the shortest path algorithm and the avoid plus option.
+ *
+ */
 public class AvoidPlus implements PathFinder {
 
 	private Station startStation;
@@ -22,6 +26,7 @@ public class AvoidPlus implements PathFinder {
 		Station endS = null;
 		double ds=0;
 		double de=0;
+		//calcul de StartStation et EndStation par brute force, les if supplémentaires servent à éviter les cas pathologiques (station pleine, etc..)
 		for (int i=0; i<velibNW.getStations().size() ;i++) {
 			
 			double di = Math.sqrt(Math.pow(start.getX()-velibNW.getStations().get(i).getPosition().getX(),2)+Math.pow(start.getY()-velibNW.getStations().get(i).getPosition().getY(),2));

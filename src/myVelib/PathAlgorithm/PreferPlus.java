@@ -7,6 +7,11 @@ import myVelib.Station.PlusStation;
 import myVelib.Station.StandardStation;
 import myVelib.Station.Station;
 
+/**
+ * 
+ * It implements PathFinder in order to find Start/EndStation with the shortest path algorithm and the prefer plus option.
+ *
+ */
 public class PreferPlus implements PathFinder {
 
 	private Station startStation;
@@ -23,6 +28,8 @@ public class PreferPlus implements PathFinder {
 		Station endS = null;
 		double ds=0;
 		double de=0;
+		
+		//Calcul de StartStation par brute force, les differents tests supplémentaires servent à éviter les cas pathologiques où il manque un vélo ou bien une station est fermée
 		for (int i=0; i<velibNW.getStations().size() ;i++) {
 			
 			double di = Math.sqrt(Math.pow(start.getX()-velibNW.getStations().get(i).getPosition().getX(),2)+Math.pow(start.getY()-velibNW.getStations().get(i).getPosition().getY(),2));
@@ -35,6 +42,8 @@ public class PreferPlus implements PathFinder {
 				startS=velibNW.getStations().get(i);
 			}
 		}
+		//Calcul de EndStation par la même méthode
+		
 		for (int j=0; j<velibNW.getStations().size() ;j++) {
 			
 			double dj = Math.sqrt(Math.pow(end.getX()-velibNW.getStations().get(j).getPosition().getX(),2)+Math.pow(end.getY()-velibNW.getStations().get(j).getPosition().getY(),2));
@@ -47,6 +56,8 @@ public class PreferPlus implements PathFinder {
 				endS=velibNW.getStations().get(j);
 			}
 		}
+		
+		//on recalcule EndStation en checkant dans un rayon 1.1 fois plus grand , au cas où une PlusStation s'y trouve.
 		
 		double d=0;
 		for (int k=0; k<velibNW.getStations().size() ;k++) {

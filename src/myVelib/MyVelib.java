@@ -33,7 +33,7 @@ public class MyVelib {
 	private int cityDimension;
 	
 	/**
-	 * 
+	 * reads the .ini file to instanciate a MyVelib object with basic configurations contained in the .ini file.
 	 * @param listOfStations
 	 * @param listOfUsers
 	 * @throws IOException 
@@ -75,6 +75,12 @@ public class MyVelib {
 		return new MyVelib(stations,users,cityDimension);
 	}
 	
+	/**
+	 * Creates a MyVelib instance by providing the Stations and Users, and creating the distance map required for pathfinder algorithms.
+	 * @param listOfStations
+	 * @param listOfUsers
+	 * @param cityDimension
+	 */
 	
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers, int cityDimension) {
 		
