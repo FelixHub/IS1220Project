@@ -27,7 +27,7 @@ public class controls_CLUI {
 			case "importFile":
 				
 			case "setup": String name = reader.next();
-						  basics.velibnetworks.add( MyVelib.myVelibINI(reader.next()));
+						  basics.velibnetworks.add(name);
 			
 			case "adduser":
 				
