@@ -123,6 +123,7 @@ public class Controls_CLUI {
 			case "display":	String velibnetworkName5 = reader.next();
 							MyVelib my_velib5 = basics.getMyVelib(velibnetworkName5);
 							my_velib5.displayState();
+							
 							break;
 			case "askForRidePlan":	int userID6 = Integer.parseInt(reader.next());
 									User user6 = basics.getUser(userID6);
@@ -135,15 +136,17 @@ public class Controls_CLUI {
 									GPS dest = new GPS(x,y);
 									AlgType alg = null;
 									switch(algtype6) {
-										case"avoidplus" : alg = AlgType.AVOIDPLUS;
-										case"fastest": alg = AlgType.FASTEST;
-										case"preferplus": alg = AlgType.PREFERPLUS;
-										case"shortest": alg = AlgType.SHORTEST;
-										default : alg = AlgType.SHORTEST;
+										case"avoidplus" : alg = AlgType.AVOIDPLUS; break;
+										case"fastest": alg = AlgType.FASTEST; break;
+										case"preferplus": alg = AlgType.PREFERPLUS; break;
+										case"shortest": alg = AlgType.SHORTEST; break;
+										default : alg = AlgType.SHORTEST; break;
 									}
 									if (algtype6.equalsIgnoreCase("AvoidPlus"))
+									System.out.println(user6.getCurrentRide().getVelibNW().getCityDimension());
 									user6.setCurrentRide(new Ride(user6.getPosition(),dest, type6, my_velib6, alg));
-									
+									user6.displayRide(user6);
+									break;
 				
 			case "displayRide": int userID7 = Integer.parseInt(reader.next());
 			 					User user7 = basics.getUser(userID7);
