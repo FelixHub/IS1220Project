@@ -1,6 +1,7 @@
 package myVelib.Misc;
 
 import myVelib.Card.Card;
+import myVelib.Station.Station;
 
 public class User {
 	
@@ -75,5 +76,45 @@ public class User {
 		// TODO Auto-generated method stub
 		return ID;
 	}
-	
+	public static void displayRide(User u) {
+		int cityDimension = u.getCurrentRide().getVelibNW().getCityDimension();
+		for(int i = 0; i< cityDimension; i ++) {
+			String s = "";
+			for(int j = 0; j < cityDimension; j ++) {
+				boolean flag = true;
+				if ( ( u.getPosition().getX() == j) && (u.getPosition().getY() == i)){
+					flag = false;
+					s = s + "S  ";
+				}
+				else if ( (u.getCurrentRide().getEnd().getX() == j) && (u.getCurrentRide().getEnd().getY() == i)){
+					flag = false;
+					s = s + "E  ";
+				}
+				else{
+					for(Station station : u.getCurrentRide().getVelibNW().getStations()) {
+					if ( ( station.getPosition().getX() == j) && (station.getPosition().getY() == i)) {
+						if(station.getState()=="OFFSERVICE") {
+							s = s + "X  ";
+						}
+						else if (station.type == "PLUS") {
+							s = s + station.getID()+"P ";
+						}
+						else {
+							s = s + station.getID()+"N ";
+						}
+						flag = false;
+						break;
+						}
+					}
+				}
+				if (flag) {s = s + "#  ";}
+			}
+			System.out.println(s);
+		}
+		System.out.println("startPosition: "+u.getPosition() );
+		System.out.println("EndPosition: "+ u.getCurrentRide().getEnd() );
+		System.out.println("StartStation: "+u.currentRide.getRidePath().getStartStation());
+		System.out.println("EndStation: "+ u.currentRide.getRidePath().getEndStation());
+		
+	}
 }

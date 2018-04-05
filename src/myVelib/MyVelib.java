@@ -110,8 +110,10 @@ public class MyVelib {
 	public static MyClock getClock() {
 		return clock;
 	}
-	public void addUser(String name,Card cT) {
+	public void addUser(User u) {
+		users.add(u);
 	}
+	
 	public String getName() {
 		return name;
 	}
@@ -168,5 +170,33 @@ public class MyVelib {
 
 	public int getCityDimension() {
 		return cityDimension;
+	}
+	
+	public void displayState() {
+		String s = "";
+		boolean flag = true;
+		for(int i = 0; i< cityDimension; i ++) {
+			s = "";
+			for(int j = 0; j < cityDimension; j ++) {
+				flag = true;
+				for(Station station : stations) {
+					if ( ( station.getPosition().getX() == j) && (station.getPosition().getY() == i)) {
+						if(station.getState()=="OFFLINE") {
+							s = s + "X  ";
+						}
+						else if (station.type == "PLUS") {
+							s = s + station.getID()+"P ";
+						}
+						else {
+							s = s + station.getID()+"N ";
+						}
+						flag = false;
+						break;
+						}
+				}
+				if (flag) {s = s + "#  ";}
+			}
+			System.out.println(s);
+		}
 	}
 }

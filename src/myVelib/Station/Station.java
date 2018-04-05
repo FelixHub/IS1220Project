@@ -41,6 +41,7 @@ public abstract class Station extends Observable {
 	int capacity;
 	int nbRent;
 	int nbReturn;
+	MyVelib StationNetwork;
 	public static int count_ID;
 	/**
 	 * to make the average occupation time statistic, we keep udapted a two dimensionnal array wich contain :
@@ -118,9 +119,11 @@ public abstract class Station extends Observable {
 						user.TimeOfLastRenting = MyVelib.getClock().getTime();
 						occupationRecord[i][0] = occupationRecord[i][0] + (user.TimeOfLastRenting - occupationRecord[i][1]);
 						nbRent ++;
-						Bicycle temp = getParkingSlots()[i];
-						getParkingSlots()[i] = null;
+						Bicycle temp = parkingSlots[i];
+						parkingSlots[i] = null;
+						if (user.getCurrentRide() != null) {
 						user.getCurrentRide().setBicycle(temp);
+						}
 						return temp;
 					}
 				}
