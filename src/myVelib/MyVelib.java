@@ -13,7 +13,6 @@ import myVelib.Station.PlusStation;
 import myVelib.Station.StandardStation;
 import myVelib.Station.Station;
 import myVelib.Station.StationFactory;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,7 +30,7 @@ public class MyVelib {
 	private static MyClock clock;
 	private double [][] distanceMap;
 	private int cityDimension;
-	private nom;
+	private String name;
 	/**
 	 * 
 	 * @param listOfStations
@@ -40,7 +39,7 @@ public class MyVelib {
 	 * @throws FileNotFoundException 
 	 */
 	
-	public MyVelib myVelibINI() throws FileNotFoundException, IOException {
+	public static MyVelib myVelibINI(String name) throws FileNotFoundException, IOException {
 		
 		final Properties prop = new Properties();
 		prop.load(new FileInputStream("eval/my_velib.ini"));
@@ -72,12 +71,13 @@ public class MyVelib {
 			stations.add(s);
 		}
 		
-		return new MyVelib(stations,users,cityDimension);
+		return new MyVelib(stations,users,cityDimension,name);
 	}
 	
 	
-	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers, int cityDimension) {
+	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers, int cityDimension, String name) {
 		
+		this.name = name;
 		this.cityDimension = cityDimension;
 		this.stations=listOfStations;
 		this.users=listOfUsers;
