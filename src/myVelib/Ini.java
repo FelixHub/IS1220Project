@@ -26,7 +26,7 @@ public class Ini {
 	
 	public static void main(String[] args) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException, FullStationException, InterruptedException {
 		
-		int cityDimension = 20;
+		int cityDimension = 10;
 		Scanner reader = new Scanner(System.in);  // Reading from System.in
 		System.out.println("How many stations do you want in the city ?");
 		int n = reader.nextInt(); 
@@ -69,7 +69,7 @@ public class Ini {
 		
 		for (User user : myVelib.getUsers()) {
 			GPS randomGPS = new GPS(cityDimension);
-			user.setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.FASTEST));
+			user.setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.SHORTEST));
 			user.getCurrentRide().getRidePath().getStartStation().takeBicycle(BicycleType.MECHANICAL, user);
 			Thread.sleep(1000);
 			displayRide(user.currentRide,user,cityDimension);
@@ -97,15 +97,17 @@ public class Ini {
 					flag = false;
 					s = s + "S  ";
 				}
-				else if ( (ride.getEnd().getX() == j) && (ride.getEnd().getY() == i)){
+				else if ( (u.getCurrentRide().getEnd().getX() == j) && (u.getCurrentRide().getEnd().getY() == i)){
 					flag = false;
 					s = s + "E  ";
 				}
 				else{
 					for(Station station : ride.getVelibNW().stations) {
-
 					if ( ( station.getPosition().getX() == j) && (station.getPosition().getY() == i)) {
-						if (station.type == "PLUS") {
+						if(station.getState()=="OFFSERVICE") {
+							s = s + "X  ";
+						}
+						else if (station.type == "PLUS") {
 							s = s + station.getID()+"P ";
 						}
 						else {
