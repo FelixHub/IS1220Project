@@ -46,7 +46,7 @@ public class MyVelib {
 		int cityDimension = Integer.parseInt(prop.getProperty("cityDim"));
 		int n = Integer.parseInt(prop.getProperty("stationsNumber"));
 		int m = Integer.parseInt(prop.getProperty("parkingSlotNumberByStation"));
-		
+		 
 		ArrayList<Station> stations = new ArrayList<Station>();
 		ArrayList<User> users = new ArrayList<User>();
 		
