@@ -55,4 +55,14 @@ public abstract class Card {
 			return new NoCard();
 		}
 	}
+	
+	public static Card Card(String cardtype) {
+		if (cardtype.equalsIgnoreCase("VLIBRE")) {
+			return new VLIBRE_Card();
+		}
+		else if(cardtype.equalsIgnoreCase("VMAX")) {
+			return new VMAX_Card();
+		}
+		else { return new NoCard();}
+	}
 }

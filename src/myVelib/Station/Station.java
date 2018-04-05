@@ -41,7 +41,7 @@ public abstract class Station extends Observable {
 	int capacity;
 	int nbRent;
 	int nbReturn;
-	static int count_ID;
+	public static int count_ID;
 	/**
 	 * to make the average occupation time statistic, we keep udapted a two dimensionnal array wich contain :
 	 * - total time the i-eme parkingSpot was occupied in first line
