@@ -27,7 +27,7 @@ import myVelib.Station.Station.FullStationException;
 import myVelib.Station.Station.OffLineStationException;
 import myVelib.Station.Station.UserAlreadyHaveBicycleException;
 public class Ini {
-	
+/*
 	public static void main(String[] args) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException, FullStationException, InterruptedException, FileNotFoundException, IOException {
 		
 			final Properties prop = new Properties();
@@ -36,12 +36,12 @@ public class Ini {
 			int n = Integer.parseInt(prop.getProperty("stationsNumber"));
 			int m = Integer.parseInt(prop.getProperty("parkingSlotNumberByStation"));
 		
-		/*
+		
 		Scanner reader = new Scanner(System.in);
 		System.out.println("combien d'usager dans votre ville ?");
 		int nbUser = reader.nextInt();
 		reader.close();
-		*/
+		
 		ArrayList<Station> stations = new ArrayList<Station>();
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -65,16 +65,16 @@ public class Ini {
 			}
 			stations.add(s);
 		}
-		/*
+		
 		for(int i = 0; i<nbUser ; i++) {
 			GPS gps = new GPS(cityDimension);
 			Card card = Card.randomCard();
 			users.add(new User("RandomGuy", gps, card));
 		}
-		*/
+	
 		MyVelib myVelib = new MyVelib(stations,users,cityDimension);
 		
-		/*
+		
 		for (User user : myVelib.getUsers()) {
 			GPS randomGPS = new GPS(cityDimension);
 			user.setCurrentRide(new Ride(users.get(0).getPosition(),randomGPS, "MECHANICAL", myVelib, AlgType.SHORTEST));
@@ -94,7 +94,7 @@ public class Ini {
 		for(User user: myVelib.getUsers()) {
 			System.out.println(user.ridesNb) ;
 		}
-		*/
+		
 	}
 	
 	
@@ -139,6 +139,7 @@ public class Ini {
 		
 	}
 	
+
+
+*/
 }
-
-

@@ -5,4 +5,7 @@ package myVelib.Card;
 
 public class NoCard extends Card{
 	
+	public String toString() {
+		return "No";
+	}
 } 

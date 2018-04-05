@@ -146,7 +146,7 @@ public class MyVelib {
 	public class StationDoesNotExist extends Throwable {
 		
 		public StationDoesNotExist(int ID) {
-		System.out.println("la station d'ID "+ID+"does not exist in this universe...");
+		System.out.println("la station d'ID "+ID+" does not exist in this universe...");
 		}
 	}
 	public Station getStation(int ID) throws StationDoesNotExist {
@@ -165,4 +165,8 @@ public class MyVelib {
 		return ss;
 	}
 
+
+	public int getCityDimension() {
+		return cityDimension;
+	}
 }

@@ -43,5 +43,7 @@ public class VLIBRE_Card extends Card{
 	public VLIBRE_Card() {
 		super();
 	}
-
+	public String toString() {
+		return "VLIBRE";
+	}
 }

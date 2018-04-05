@@ -69,5 +69,11 @@ public class User {
 	public void setCurrentRide(Ride ride) {
 		currentRide = ride;
 	}
+
+
+	public int getID() {
+		// TODO Auto-generated method stub
+		return ID;
+	}
 	
 }

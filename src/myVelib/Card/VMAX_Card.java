@@ -18,4 +18,8 @@ public class VMAX_Card extends Card{
 		 */
 		return(time/60);
 	}
+	
+	public String toString() {
+		return "VMAX";
+	}
 }
