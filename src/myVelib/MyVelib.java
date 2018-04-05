@@ -1,14 +1,22 @@
 package myVelib;
 
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Random;
 
+import myVelib.Bicycle.Bicycle;
 import myVelib.Card.Card;
 import myVelib.Misc.GPS;
 import myVelib.Misc.MyClock;
 import myVelib.Misc.User;
+import myVelib.Station.PlusStation;
+import myVelib.Station.StandardStation;
 import myVelib.Station.Station;
 import myVelib.Station.StationFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.Math;
 /**
  * this is the main class of the program, which has the stations, users and the central Clock system as attributes
@@ -27,7 +35,46 @@ public class MyVelib {
 	 * 
 	 * @param listOfStations
 	 * @param listOfUsers
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
+	
+	public MyVelib myVelibINI() throws FileNotFoundException, IOException {
+		
+		final Properties prop = new Properties();
+		prop.load(new FileInputStream("eval/my_velib.ini"));
+		int cityDimension = Integer.parseInt(prop.getProperty("cityDim"));
+		int n = Integer.parseInt(prop.getProperty("stationsNumber"));
+		int m = Integer.parseInt(prop.getProperty("parkingSlotNumberByStation"));
+		
+		ArrayList<Station> stations = new ArrayList<Station>();
+		ArrayList<User> users = new ArrayList<User>();
+		
+		for(int i = 0; i<n;i++) {
+			GPS gps = new GPS(cityDimension);
+			Random rn = new Random();
+			int randomNum = rn.nextInt(2);
+			Station s;
+			if (randomNum == 0) {
+				s = new StandardStation(gps,m) ;
+			}
+			else{
+				s = new PlusStation(gps,m);
+			}
+			for(int j = 0;j<m;j++) {
+				Random rd = new Random();
+				int randomNum1 = rd.nextInt(10);
+				if ( randomNum1 < 8 ) {
+					s.getParkingSlots()[j] = Bicycle.randomBicycle();
+				}
+			}
+			stations.add(s);
+		}
+		
+		return new MyVelib(stations,users);
+	}
+	
+	
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers) {
 		
 		this.stations=listOfStations;
@@ -91,5 +138,7 @@ public class MyVelib {
 		 
 		return leastID;
 	}
+	
+	
 
 }
