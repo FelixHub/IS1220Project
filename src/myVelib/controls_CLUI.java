@@ -1,5 +1,7 @@
 package myVelib;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,8 +13,8 @@ public class controls_CLUI {
 	public ArrayList<MyVelib> velibnetworks;
 	
 	
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) throws NetworkDoesNotExist, StationDoesNotExist, FileNotFoundException, IOException {
+		controls_CLUI basics = new controls_CLUI();
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Welcome to the my_velib CLUI !");
 		System.out.println("Enter your commands here. Enter help for informations about the commands");
@@ -21,16 +23,27 @@ public class controls_CLUI {
 		while (!((commande = reader.next()).equalsIgnoreCase("exit"))) {
 			
 			switch(commande) {
+			
+			case "importFile":
 				
-			case "setup": 
+			case "setup": String name = reader.next();
+						  basics.velibnetworks.add(name);
 			
 			case "adduser":
 				
 			case "offline": String velibnetworkName = reader.next();
 							int stationID = Integer.parseInt(reader.next());
-							MyVelib my_velib = getVelibnetwork(velibnetworkName);
+							MyVelib my_velib = basics.getMyVelib(velibnetworkName);
 							Station station = my_velib.getStation(stationID);
-			case "online":
+							station.putOffLine();
+							System.out.println("the station"+stationID+"of network"+velibnetworkName+"is now offline");
+							
+			case "online":	String velibnetworkName1 = reader.next();
+							int stationID1 = Integer.parseInt(reader.next());
+							MyVelib my_velib1 = basics.getMyVelib(velibnetworkName1);
+							Station station1 = my_velib1.getStation(stationID1);
+							station1.putOnline();
+							System.out.println("the station"+stationID1+"of network"+velibnetworkName1+"is now online");
 				
 			case "rentBike":
 				
@@ -50,15 +63,18 @@ public class controls_CLUI {
 			
 			}
 			
-			System.out.println( reader.next());
+			System.out.println("goodbye !");
 		}
 	
 	
-	public StationDoesNotExist(int ID) {
-	System.out.println("la station d'ID "+ID+"does not exist in this universe...");
+public class NetworkDoesNotExist extends Throwable {
+		
+		public NetworkDoesNotExist(String name) {
+		System.out.println("la station d'ID "+name+"does not exist in this universe...");
+		}
 	}
 
-	public MyVelib getMyVelib(String name) throws NetworkDoesNotExist {
+	public MyVelib getMyVelib(String name) throws NetworkDoesNotExist{
 		boolean flag = false;
 		MyVelib ss = null;
 		for(MyVelib mv : velibnetworks) {
