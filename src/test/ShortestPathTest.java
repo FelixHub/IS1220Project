@@ -11,7 +11,7 @@ class ShortestPathTest {
 
 	@Test
 	void testPath() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
