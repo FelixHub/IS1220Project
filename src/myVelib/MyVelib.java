@@ -18,7 +18,7 @@ import java.lang.Math;
 
 public class MyVelib {
 
-	private ArrayList<Station> stations=new ArrayList<Station>();
+	ArrayList<Station> stations=new ArrayList<Station>();
 	private ArrayList<User> users = new ArrayList<User>();
 	private static MyClock clock;
 	private double [][] distanceMap;
@@ -38,31 +38,22 @@ public class MyVelib {
 		int j = 0;
 		for (Station si : stations)  {
 			for (Station sj : stations) {
-				distanceMap[i][j] = Math.sqrt((si.getPosition().getX()-sj.getPosition().getX())^2+(si.getPosition().getY()-sj.getPosition().getY())^2);
-				j++;
+				distanceMap[i][j] = Math.sqrt( Math.pow(si.getPosition().getX()-sj.getPosition().getX(),2)
+									+ Math.pow(si.getPosition().getY()-sj.getPosition().getY(), 2) );
+			j++;
 			}
+			j = 0;
 			i++;
 		}
 	}
 	
-	public MyVelib(int nStations, int mParkingSpot) {
-		
-		StationFactory factory = new StationFactory();
-		for (int i=1; i<=nStations*0.2;i++) {
-			GPS gi=new GPS(10000);
-			Station sPlusi=new PlusStation(gi,Math.floor(a))
-			
-		}
-		
-	}
+
 	
-	
+
 	public double[][] getDistanceMap() {
 		return distanceMap;
 
 	}
-	
-
 	
 	public ArrayList<User> getUsers() {
 		return users;
@@ -71,12 +62,7 @@ public class MyVelib {
 		return clock;
 	}
 	public void addUser(String name,Card cT) {
-		
 	}
-	public void addStation(String nam) {
-		
-	}
-	
 
 
 	public ArrayList<Station> getStations() {

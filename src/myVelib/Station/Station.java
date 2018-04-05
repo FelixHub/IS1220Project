@@ -33,11 +33,11 @@ public abstract class Station extends Observable {
 	/**
 	 * the type of the station is "PLUS" or "STANDARD".
 	 */
-	String type; 
+	public String type; 
 	/**
 	 * Parking slots are represented by the index of an array of length the number of  station's parkingSpot
 	 */
-	Bicycle[] parkingSlots;
+	protected Bicycle[] parkingSlots;
 	int capacity;
 	int nbRent;
 	int nbReturn;
@@ -51,13 +51,16 @@ public abstract class Station extends Observable {
 	
 	ArrayList<Observer> incomingRides;
 	
+	
 	public void removeObserver(Observer observer) {
 		incomingRides.remove(observer); 
 	}
 	public void addObserver(Observer observer) {
 		incomingRides.add(observer);
 	}
-	
+	/**
+	 *  Station class notify its Ride observer of its indisponibility.
+	 */
 	public void notifyObserver() {
 		if ( (freeParkingSpotsNb() == 0) || (state.equals("OFFLINE")) ){
 			for (Observer ob : incomingRides) {
@@ -66,10 +69,10 @@ public abstract class Station extends Observable {
 		}
 	}
 	
-	class FullStationException extends Exception{}
-	class EmptyStationException extends Exception{}
-	class OffLineStationException extends Exception{}
-	class UserAlreadyHaveBicycleException extends Exception{}
+	public class FullStationException extends Exception{}
+	public class EmptyStationException extends Exception{}
+	public class OffLineStationException extends Exception{}
+	public class UserAlreadyHaveBicycleException extends Exception{}
 
 	
 	public void parkBicycle(Bicycle bicycle, User user) throws FullStationException, OffLineStationException {
@@ -78,8 +81,8 @@ public abstract class Station extends Observable {
 			else if (state.equals("OFFLINE")) throw new OffLineStationException();
 			else {
 				for(int i = 0; i < capacity; i++) {
-					if (parkingSlots[i] == null) {
-						parkingSlots[i] = bicycle;
+					if (getParkingSlots()[i] == null) {
+						getParkingSlots()[i] = bicycle;
 						long returnTime = MyVelib.getClock().getTime();
 						occupationRecord[i][1] = returnTime;
 						nbReturn ++;
@@ -108,12 +111,15 @@ public abstract class Station extends Observable {
 			else if (state.equals("OFFLINE")) throw new OffLineStationException();
 			else {
 				for(int i = 0; i < capacity; i++) {
-					if ((parkingSlots[i].getType()).equals(type)) {
+					if(parkingSlots[i] == null) {
+						continue;
+					}
+					if (parkingSlots[i].getType() == type ) {
 						user.TimeOfLastRenting = MyVelib.getClock().getTime();
 						occupationRecord[i][0] = occupationRecord[i][0] + (user.TimeOfLastRenting - occupationRecord[i][1]);
 						nbRent ++;
-						Bicycle temp = parkingSlots[i];
-						parkingSlots[i] = null;
+						Bicycle temp = getParkingSlots()[i];
+						getParkingSlots()[i] = null;
 						user.getCurrentRide().setBicycle(temp);
 						return temp;
 					}
@@ -129,7 +135,10 @@ public abstract class Station extends Observable {
 	public int countBicycle(BicycleType type) {
 		int t = 0;
 		for(Bicycle slot : parkingSlots) {
-			if ((slot.getType()).equals(type)) {
+			if(slot == null) {
+				continue;
+			}
+			else if ((slot.getType()).equals(type)) {
 				t ++;
 			}
 		}
@@ -138,7 +147,7 @@ public abstract class Station extends Observable {
 	
 	public int freeParkingSpotsNb() {
 		int s = 0;
-		for(Bicycle slot : parkingSlots) {
+		for(Bicycle slot : getParkingSlots()) {
 			if (slot == null) {
 				s ++;
 			}
@@ -198,6 +207,18 @@ public abstract class Station extends Observable {
 			}
 		s = s/(ts*capacity);
 		return s;
+	}
+	
+	public Station(String stationType,GPS position, int capacity) {
+		StationFactory.createStation(stationType,position, capacity);
+	}
+	public Station() {
+	}
+	public Bicycle[] getParkingSlots() {
+		return parkingSlots;
+	}
+	public String toString() {
+		return  type + "station"+getID();
 	}
  
 }

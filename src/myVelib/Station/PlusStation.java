@@ -20,6 +20,9 @@ public class PlusStation extends Station {
 		Station.count_ID ++ ;
 		this.capacity = capacity;
 		this.parkingSlots = new Bicycle[capacity];
+		for(int i = 0; i<capacity ; i++) {
+			getParkingSlots()[i] = null;
+		}
 		this.nbRent = 0;
 		this.nbReturn = 0;
 		this.state = "ONSERVICE";

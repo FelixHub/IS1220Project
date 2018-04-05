@@ -33,6 +33,7 @@ public class User {
 		long TimeOfLastRenting=0;
 	}
 	
+	
 	public String getName() {
 		return name;
 	}

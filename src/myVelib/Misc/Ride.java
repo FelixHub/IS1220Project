@@ -30,28 +30,28 @@ public class Ride implements Observer{
 		this.start=start;
 		this.end=end;
 		this.velibNW=velibNW;
+		this.bicycle = BicycleFactory.createBicycle(type);
 		switch (algType) {
 			case SHORTEST:
-				this.ridePath=new ShortestPath();
+				this.setRidePath(new ShortestPath());
 				break;
 			case FASTEST:
-				this.ridePath=new FastestPath();
+				this.setRidePath(new FastestPath());
 				break;
 			case AVOIDPLUS:
-				this.ridePath=new AvoidPlus();
+				this.setRidePath(new AvoidPlus());
 				break;
 			case PREFERPLUS:
-				this.ridePath=new PreferPlus();
+				this.setRidePath(new PreferPlus());
 				break;
 		}
-		ridePath.path(start, end, velibNW, bicycle.getType());
-		this.bicycle = null;
-		ridePath.getEndStation().addObserver(this);
+		getRidePath().path(start, end, velibNW, bicycle.getType());
+		getRidePath().getEndStation().addObserver(this);
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
-			ridePath.path(start,end,velibNW,bicycle.getType());
+			getRidePath().path(start,end,getVelibNW(),bicycle.getType());
 		
 	}
 
@@ -73,6 +73,18 @@ public class Ride implements Observer{
 
 	public Bicycle getBicycle() {
 		return bicycle;
+	}
+
+	public PathFinder getRidePath() {
+		return ridePath;
+	}
+
+	public void setRidePath(PathFinder ridePath) {
+		this.ridePath = ridePath;
+	}
+
+	public MyVelib getVelibNW() {
+		return velibNW;
 	}
 	
 }
