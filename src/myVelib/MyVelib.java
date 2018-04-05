@@ -31,9 +31,9 @@ public class MyVelib {
 	private static MyClock clock;
 	private double [][] distanceMap;
 	private int cityDimension;
-	
+	private nom;
 	/**
-	 * reads the .ini file to instanciate a MyVelib object with basic configurations contained in the .ini file.
+	 * 
 	 * @param listOfStations
 	 * @param listOfUsers
 	 * @throws IOException 
@@ -75,12 +75,6 @@ public class MyVelib {
 		return new MyVelib(stations,users,cityDimension);
 	}
 	
-	/**
-	 * Creates a MyVelib instance by providing the Stations and Users, and creating the distance map required for pathfinder algorithms.
-	 * @param listOfStations
-	 * @param listOfUsers
-	 * @param cityDimension
-	 */
 	
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers, int cityDimension) {
 		
@@ -118,12 +112,13 @@ public class MyVelib {
 	}
 	public void addUser(String name,Card cT) {
 	}
-
+	public String getName() {
+		return name;
+	}
 
 	public ArrayList<Station> getStations() {
 		return stations;
 	}
-	
 	public int mostUsedStation() {
 		int maxID=0;
 		int max = 0;
@@ -148,7 +143,26 @@ public class MyVelib {
 		 
 		return leastID;
 	}
-	
-	
+	public class StationDoesNotExist extends Throwable {
+		
+		public StationDoesNotExist(int ID) {
+		System.out.println("la station d'ID "+ID+"does not exist in this universe...");
+		}
+	}
+	public Station getStation(int ID) throws StationDoesNotExist {
+		boolean flag = false;
+		Station ss = null;
+		for(Station s : stations) {
+			if (s.getID() == ID) {
+				flag = true;
+				ss =s;
+			}
+		}
+		if (!(flag)) {
+			throw new StationDoesNotExist(ID);
+			
+		}
+		return ss;
+	}
 
 }
