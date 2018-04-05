@@ -13,14 +13,15 @@ public abstract class Card {
 	 
 	private long timeCredit;
 	
-	
-	public double rideCost(long time, Bicycle bicycle) {
-		/**
+	/**
 		 * there's three way to compute the cost of a ride depending of the card possessed by the user.
 		 * VLIBRE_Card and VMAX_Card does override rideCost.
 		 * The default way is corresponding to an absence of card, NoCard does not override rideCost.
 		 *  the cost is 1 Euro per hour (for mechanical bikes) and 2 Euro per hour (for electrical bikes) 
 		 */
+	
+	public double rideCost(long time, Bicycle bicycle) {
+		
 		if (bicycle instanceof ElectricBicycle) {
 			return 2*(1 + time/60);
 		}

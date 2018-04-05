@@ -1,7 +1,11 @@
 package myVelib.Misc;
 
 import java.util.Random;
-
+/**
+ * This class is used to set the position of a user or a station on a squared grid with integer coordinates
+ * 
+ *
+ */
 public class GPS {
 	private int x;
 	private int y;

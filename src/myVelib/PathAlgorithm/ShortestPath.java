@@ -6,6 +6,11 @@ import myVelib.Misc.GPS;
 import myVelib.Station.Station;
 import java.lang.Math;
 
+/**
+ * 
+ * @author Tom
+ *
+ */
 public class ShortestPath implements PathFinder {
 	
 	private Station startStation;

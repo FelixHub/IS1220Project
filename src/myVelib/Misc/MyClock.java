@@ -1,5 +1,10 @@
 package myVelib.Misc;
 
+/**
+ * 
+ * The class used to simulate time.
+ *
+ */
 public class MyClock {
 	
 	private final long offset;

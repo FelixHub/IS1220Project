@@ -15,6 +15,11 @@ import myVelib.PathAlgorithm.PreferPlus;
 import myVelib.PathAlgorithm.ShortestPath;
 import myVelib.Station.Station;
 
+/**
+ * This class manages the information of the ride currently followed by a user.
+ * 
+ *
+ */
 public class Ride implements Observer{
 
 	private GPS start;
@@ -24,7 +29,14 @@ public class Ride implements Observer{
 	private Bicycle bicycle;
 	private MyVelib velibNW;
 
-	
+	/**
+	 * this constructor run the path method from subclasses from PathFinder in order to get the StartStation and EndStation.
+	 * @param start
+	 * @param end
+	 * @param type
+	 * @param velibNW
+	 * @param algType
+	 */
 	
 	public Ride(GPS start, GPS end, String type, MyVelib velibNW, AlgType algType ) {
 		this.start=start;
@@ -48,6 +60,10 @@ public class Ride implements Observer{
 		getRidePath().path(start, end, velibNW, bicycle.getType());
 		getRidePath().getEndStation().addObserver(this);
 	}
+	
+	/**
+	 * if a station's state changes while the user is moving, the observer/observable design rerun the path() method to change the EndStation accordingly.
+	 */
 	
 	@Override
 	public void update(Observable o, Object arg) {
