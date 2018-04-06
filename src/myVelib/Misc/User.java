@@ -142,4 +142,10 @@ public class User {
 		bicycle =b;
 		
 	}
+
+
+	public Bicycle getBicycle() {
+		return bicycle;
+	}
+	
 }

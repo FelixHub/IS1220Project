@@ -76,6 +76,14 @@ public abstract class Station extends Observable {
 	public class UserAlreadyHaveBicycleException extends Exception{}
 
 	
+	/**
+	 * park user's bicycle at the destination station and run methods to process costs, duration of ride, statistics etc..
+	 * @param bicycle
+	 * @param user
+	 * @throws FullStationException
+	 * @throws OffLineStationException
+	 */
+	
 	public void parkBicycle(Bicycle bicycle, User user) throws FullStationException, OffLineStationException {
 		try {
 			if(freeParkingSpotsNb() == 0) throw new FullStationException();
@@ -109,6 +117,15 @@ public abstract class Station extends Observable {
 		  catch(OffLineStationException e) {System.out.println("this station is offline, you can't park here");}
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 * @param user
+	 * @return
+	 * @throws EmptyStationException
+	 * @throws UserAlreadyHaveBicycleException
+	 * @throws OffLineStationException
+	 */
 	public Bicycle takeBicycle(BicycleType type, User user) throws EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException {
 		try {
 			if (countBicycle(type) == 0) throw new EmptyStationException();
@@ -126,8 +143,11 @@ public abstract class Station extends Observable {
 						Bicycle temp = parkingSlots[i];
 						parkingSlots[i] = null;
 						if (user.getCurrentRide() != null) {
-						user.getCurrentRide().setBicycle(temp);
+							user.getCurrentRide().setBicycle(temp);
+						
 						}
+						user.setBicycle(temp);
+						user.possessBicycle=true;	
 						return temp;
 					}
 				}
@@ -138,6 +158,11 @@ public abstract class Station extends Observable {
 	return null;
 	}
 	
+	/**
+	 * return the number of bicycle of a certain type available at the station 
+	 * @param type
+	 * @return
+	 */
 	
 	public int countBicycle(BicycleType type) {
 		int t = 0;
@@ -152,6 +177,10 @@ public abstract class Station extends Observable {
 		return t;
 	}
 	
+	/**
+	 * return the number of available parking spot at the station
+	 * @return
+	 */
 	public int freeParkingSpotsNb() {
 		int s = 0;
 		for(Bicycle slot : getParkingSlots()) {
