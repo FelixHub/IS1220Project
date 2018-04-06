@@ -1,4 +1,4 @@
-package myVelib.Station;
+package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import myVelib.Bicycle.BicycleFactory;
 import myVelib.Bicycle.BicycleType;
 import myVelib.Misc.GPS;
+import myVelib.Station.Station;
+import myVelib.Station.StationFactory;
 
 class StationTest {
 

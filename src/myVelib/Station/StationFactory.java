@@ -11,7 +11,7 @@ public class StationFactory {
 	public StationFactory() {
 	}
 	
-	static Station createStation(String StationType,GPS position, int capacity) {
+	public static Station createStation(String StationType,GPS position, int capacity) {
 			if(StationType.equalsIgnoreCase("PLUS")) {
 				return new PlusStation(position,capacity);
 			}

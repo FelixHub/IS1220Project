@@ -100,40 +100,6 @@ public class MyVelib {
 		}
 	}
 	
-	public static  MyVelib myVelibExample() {
-		
-		ArrayList<Station> stations = new ArrayList<Station>();
-		ArrayList<User> users = new ArrayList<User>();
-		BicycleFactory myFactory= new BicycleFactory();
-		
-		
-		GPS GPS1 = new GPS(0,7);
-		Station s1 = new StandardStation(GPS1,3);
-		s1.getParkingSlots()[0] = new ElectricBicycle();
-		s1.getParkingSlots()[1] = new MechanicalBicycle();
-		
-		GPS GPS2 = new GPS(6,3);
-		Station s2 = new StandardStation(GPS2,3);
-		s2.getParkingSlots()[0] = new ElectricBicycle();
-		s2.getParkingSlots()[1] = new MechanicalBicycle();
-		
-		GPS GPS3 = new GPS(3,4);
-		Station p3 = new PlusStation(GPS3,3);
-		p3.getParkingSlots()[0] = new ElectricBicycle();
-		p3.getParkingSlots()[1] = new MechanicalBicycle();
-		
-		GPS GPS4 = new GPS(9,7);
-		Station p4 = new PlusStation(GPS4,3);
-		p4.getParkingSlots()[0] = new ElectricBicycle();
-		p4.getParkingSlots()[1] = new MechanicalBicycle();
-		
-		stations.add(s1);
-		stations.add(s2);
-		stations.add(p3);
-		stations.add(p4);
-		
-		return new MyVelib(stations,users,10,"myVelibTest");
-	}
 	
 
 	public double[][] getDistanceMap() {
