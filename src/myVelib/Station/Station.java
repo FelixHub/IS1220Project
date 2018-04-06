@@ -82,16 +82,20 @@ public abstract class Station extends Observable {
 			else if (state.equals("OFFLINE")) throw new OffLineStationException();
 			else {
 				for(int i = 0; i < capacity; i++) {
-					if (getParkingSlots()[i] == null) {
-						getParkingSlots()[i] = bicycle;
+
+					if (parkingSlots[i] == null) {
+						parkingSlots[i] = bicycle;
 						long returnTime = MyVelib.getClock().getTime();
 						occupationRecord[i][1] = returnTime;
 						nbReturn ++;
 						user.addCharges( user.getUserCard().rideCost(
 								returnTime - user.TimeOfLastRenting,bicycle));
 						user.ridesNb ++;
+						user.setTimeSpentOnBike(returnTime - user.TimeOfLastRenting);
 						removeObserver(user.getCurrentRide());
 						user.setCurrentRide(null);
+						user.bicycle = null;
+						user.possessBicycle = false;
 						if ((this.type).equalsIgnoreCase("PLUS")){
 							user.getUserCard().setTimeCredit(user.getUserCard().getTimeCredit()+5);
 							user.timeCreditBalance = user.timeCreditBalance + 5;
@@ -115,7 +119,7 @@ public abstract class Station extends Observable {
 					if(parkingSlots[i] == null) {
 						continue;
 					}
-					if (parkingSlots[i].getType() == type ) {
+					else if (parkingSlots[i].type == type ) {
 						user.TimeOfLastRenting = MyVelib.getClock().getTime();
 						occupationRecord[i][0] = occupationRecord[i][0] + (user.TimeOfLastRenting - occupationRecord[i][1]);
 						nbRent ++;

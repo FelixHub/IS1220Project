@@ -1,5 +1,6 @@
 package myVelib.Misc;
 
+import myVelib.Bicycle.Bicycle;
 import myVelib.Card.Card;
 import myVelib.Station.Station;
 
@@ -10,7 +11,7 @@ public class User {
 	GPS position;
 	Card userCard;
 	public int ridesNb;
-	float timeSpentOnBike;
+	private long  timeSpentOnBike;
 	public int timeCreditBalance;
 	int ID;
 	double chargesAmount;
@@ -18,8 +19,10 @@ public class User {
 	public Ride currentRide;
 	public long TimeOfLastRenting;
 	public Boolean possessBicycle;
+	public Bicycle bicycle;
 	
 	public User(String name, GPS position, Card card) {
+		this.bicycle = null;
 		this.possessBicycle = false;
 		this.name = name;
 		this.position = position;
@@ -35,6 +38,22 @@ public class User {
 	}
 	
 	
+	public double getChargesAmount(){
+		return chargesAmount;
+	}
+	public int getRidesNb() {
+		return ridesNb;
+	}
+	public long getTimeSpentOnBike() {
+		return timeSpentOnBike;
+	}
+	public void setTimeSpentOnBike(long time) {
+		timeSpentOnBike = time;
+	}
+	
+	public int getTimeCreditBalance() {
+		return timeCreditBalance;
+	}
 	public String getName() {
 		return name;
 	}
@@ -115,6 +134,12 @@ public class User {
 		System.out.println("EndPosition: "+ u.getCurrentRide().getEnd() );
 		System.out.println("StartStation: "+u.currentRide.getRidePath().getStartStation());
 		System.out.println("EndStation: "+ u.currentRide.getRidePath().getEndStation());
+		
+	}
+
+
+	public void setBicycle(Bicycle b) {
+		bicycle =b;
 		
 	}
 }

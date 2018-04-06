@@ -10,7 +10,7 @@ import java.util.Random;
 public abstract class Bicycle {
 	protected int ID;
 	static int count_ID;
-	protected BicycleType type;
+	public BicycleType type;
 	
 	/**
 		 *  return the ID of the Bicycle, which is unique.
@@ -26,7 +26,6 @@ public abstract class Bicycle {
 	public BicycleType getType() {
 		
 		return type;
-		
 	}
 	
 	/**

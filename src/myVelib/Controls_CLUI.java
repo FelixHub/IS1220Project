@@ -39,7 +39,8 @@ public class Controls_CLUI {
 		System.out.println("Enter your commands here. Enter help for informations about the commands");
 		System.out.println("To end the simulation, enter exit. Be careful with uppercases...");
 		String commande = "";
-		while (!((commande = reader.next()).equalsIgnoreCase("exit"))) {
+		boolean flagg = true;
+		while ( (!((commande = reader.next()).equalsIgnoreCase("exit"))) && flagg ) {
 			
 			switch(commande) {
 			
@@ -85,11 +86,8 @@ public class Controls_CLUI {
 							if (type.equalsIgnoreCase("ELECTRIC")) {
 								typeb = BicycleType.ELECTRIC;
 							}
-							if (user2.getCurrentRide() != null) {
-								//trouver une solution pour appeler le bon network...
-								user2.setCurrentRide(new Ride(station2.getPosition(),station2.getPosition(), type, basics.velibnetworks.get(0), AlgType.SHORTEST));
-							}
-							station2.takeBicycle(typeb, user2);
+							user2.setBicycle(station2.takeBicycle(typeb, user2));
+							user2.possessBicycle = true;
 							System.out.println("User "+user2.getName()+" rented a "+ typeb+" bike at station "+ station2.getID());
 							break;
 							
@@ -97,9 +95,10 @@ public class Controls_CLUI {
 							   int stationID3 = Integer.parseInt(reader.next());
 							   Station station3 = basics.getStation(stationID3);
 							   User user3 = basics.getUser(userID3);
-							   if (user3.getCurrentRide() != null) {
-								   Bicycle bicycle = user3.getCurrentRide().getBicycle();
-								   station3.parkBicycle(bicycle,user3);
+							   if (user3.possessBicycle == true) {
+								   station3.parkBicycle(user3.bicycle,user3);
+								   System.out.println("User "+userID3+" has parked his bike at station "+ stationID3);
+								   System.out.println("His charges balance is now at "+user3.getChargesAmount()+ "euros." );
 							   }
 							   else {
 								   System.out.println("the user possess no bike to return...");
@@ -115,16 +114,24 @@ public class Controls_CLUI {
 									System.out.println("Number of return operations from station "+
 											stationID4 + " : "+ station4.getNbReturn());
 									//réparer averagerateofoccupation qui ne marche pas très bien...
-									System.out.println("Average rate of occupation :"+ station4.averageRateOfOccupation());
+									System.out.println("Average rate of occupation : "+ station4.averageRateOfOccupation());
 									break;
 									
+			case "displayUser":	int userID8 = Integer.parseInt(reader.next());
+								User user8 = basics.getUser(userID8);
+								System.out.println("Number of ride performed by user "+ userID8+" : "+ user8.getRidesNb());
+								System.out.println("Total time spent on a bike : "+ user8.getTimeSpentOnBike() );
+								System.out.println("Total charge amount : "+ user8.getChargesAmount());
+								System.out.println("Current time credit : "+ user8.getTimeCreditBalance());
+								break;
+				
 			case "sortStation":
 				
 			case "display":	String velibnetworkName5 = reader.next();
 							MyVelib my_velib5 = basics.getMyVelib(velibnetworkName5);
 							my_velib5.displayState();
-							
 							break;
+							
 			case "askForRidePlan":	int userID6 = Integer.parseInt(reader.next());
 									User user6 = basics.getUser(userID6);
 									int x = Integer.parseInt(reader.next());
@@ -141,8 +148,7 @@ public class Controls_CLUI {
 										case"preferplus": alg = AlgType.PREFERPLUS; break;
 										case"shortest": alg = AlgType.SHORTEST; break;
 										default : alg = AlgType.SHORTEST; break;
-									}
-									if (algtype6.equalsIgnoreCase("AvoidPlus"))
+										}
 									System.out.println(user6.getCurrentRide().getVelibNW().getCityDimension());
 									user6.setCurrentRide(new Ride(user6.getPosition(),dest, type6, my_velib6, alg));
 									user6.displayRide(user6);
@@ -151,7 +157,13 @@ public class Controls_CLUI {
 			case "displayRide": int userID7 = Integer.parseInt(reader.next());
 			 					User user7 = basics.getUser(userID7);
 								User.displayRide(user7);
-								break;		
+								break;	
+			
+			case "passingTime": int time = Integer.parseInt(reader.next());
+								MyVelib.getClock().addTime(time*1000/60);
+								break;
+								
+			default : System.out.println("command not recognized."); flagg = false; break;
 			}
 			
 			

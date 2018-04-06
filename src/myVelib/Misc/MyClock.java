@@ -7,7 +7,7 @@ package myVelib.Misc;
  */
 public class MyClock {
 	
-	private final long offset;
+	private long offset;
 
     public MyClock(){
         offset = System.currentTimeMillis();
@@ -21,7 +21,9 @@ public class MyClock {
         return ((System.currentTimeMillis() - offset)*60/1000);
     }
     
-    
+    public void addTime(long time) {
+    	offset = offset - time ;
+    }
 
 
 }

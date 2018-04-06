@@ -58,7 +58,7 @@ public class MyVelib {
 			GPS gps = new GPS(cityDimension);
 			Random rn = new Random();
 			int randomNum = rn.nextInt(2);
-			Station s;
+			Station s = null;
 			if (randomNum == 0) {
 				s = new StandardStation(gps,m) ;
 			}
