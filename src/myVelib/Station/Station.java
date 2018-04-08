@@ -49,18 +49,26 @@ public abstract class Station extends Observable {
 	 * - last time a bicycle was park in the i-eme parkingSpot 
 	 */
 	public long[][] occupationRecord;
-	
+	/**
+	 * the Observers of the Station are in this list, they are the incoming rides.
+	 */
 	ArrayList<Observer> incomingRides;
 	
-	
+	/**
+	 * remove ride from observer, typically when the ride has ended, or has changed of EndStation.
+	 * @param observer
+	 */
 	public void removeObserver(Observer observer) {
 		incomingRides.remove(observer); 
 	}
+	/**
+	 * add a ride to the Observers.
+	 */
 	public void addObserver(Observer observer) {
 		incomingRides.add(observer);
 	}
 	/**
-	 *  Station class notify its Ride observer of its indisponibility.
+	 *  Station class notify the Ride Observer of its indisponibility.
 	 */
 	public void notifyObserver() {
 		if ( (freeParkingSpotsNb() == 0) || (state.equals("OFFLINE")) ){
@@ -78,6 +86,7 @@ public abstract class Station extends Observable {
 	
 	/**
 	 * park user's bicycle at the destination station and run methods to process costs, duration of ride, statistics etc..
+	 * this process affect a large number of object of the my_velib system.
 	 * @param bicycle
 	 * @param user
 	 * @throws FullStationException
@@ -119,7 +128,8 @@ public abstract class Station extends Observable {
 	}
 	
 	/**
-	 * 
+	 * taking of a bicycle of a certain type by a certain user.
+	 * this process affect a large number of object of the my_velib system.
 	 * @param type
 	 * @param user
 	 * @return
@@ -232,7 +242,10 @@ public abstract class Station extends Observable {
 	public void putOnline() {
 		state = "ONSERVICE";
 	}
-	
+	/**
+	 * comput the average rate of occupation as define in the énoncé, but Te is always equal to 0.
+	 * @return
+	 */
 	public float averageRateOfOccupation() {
 		//long te = 0;
 		long ts = MyVelib.getClock().getTime();

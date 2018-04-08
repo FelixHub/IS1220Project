@@ -22,7 +22,10 @@ import myVelib.Station.Station.EmptyStationException;
 import myVelib.Station.Station.FullStationException;
 import myVelib.Station.Station.OffLineStationException;
 import myVelib.Station.Station.UserAlreadyHaveBicycleException;
-
+/**
+ * the main class of our program, which contain the CLUI.
+ *
+ */
 public class Controls_CLUI {
 	
 	public ArrayList<MyVelib> velibnetworks;
@@ -33,7 +36,20 @@ public class Controls_CLUI {
 		this.usersGlobal = new ArrayList<User>();
 		this.stationsGlobal = new ArrayList<Station>();
 	}
-	
+	/**
+	 * 
+	 * @param args
+	 * @throws NetworkDoesNotExist
+	 * @throws StationDoesNotExist
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws myVelib.MyVelib.StationDoesNotExist
+	 * @throws UserDoesNotExist
+	 * @throws EmptyStationException
+	 * @throws UserAlreadyHaveBicycleException
+	 * @throws OffLineStationException
+	 * @throws FullStationException
+	 */
 	public static void main(String[] args) throws NetworkDoesNotExist, StationDoesNotExist, FileNotFoundException, IOException, myVelib.MyVelib.StationDoesNotExist, UserDoesNotExist, EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException, FullStationException {
 		Controls_CLUI basics = new Controls_CLUI();
 		Scanner reader = new Scanner(System.in);
@@ -112,10 +128,12 @@ public class Controls_CLUI {
 			case "returnbike": int userID3 = Integer.parseInt(reader.next());
 							   int stationID3 = Integer.parseInt(reader.next());
 							   Station station3 = basics.getStation(stationID3);
-							   User user3 = basics.getUser(userID3);
-							   if (user3.possessBicycle == true) {
-								   station3.parkBicycle(user3.bicycle,user3);
+							   double a = basics.getUser(userID3).getChargesAmount();
+							   if (basics.getUser(userID3).possessBicycle == true) {
+								   station3.parkBicycle(basics.getUser(userID3).bicycle,basics.getUser(userID3));
 								   System.out.println("User "+userID3+" has parked his bike at station "+ stationID3);
+								   double b = basics.getUser(userID3).getChargesAmount();
+								   System.out.println("The ride has costed "+ (b-a)+ "euros.");
 							   }
 							   else {
 								   System.out.println("the user possess no bike to return...");
@@ -135,7 +153,7 @@ public class Controls_CLUI {
 									
 			case "displayuser":	int userID8 = Integer.parseInt(reader.next());
 								User user8 = basics.getUser(userID8);
-								System.out.println("* * * User "+ userID8+" * * *");
+								System.out.println("* * * User "+ userID8+" "+user8.getName()+" * * *");
 								System.out.println("Number of ride performed : "+ user8.getRidesNb());
 								System.out.println("Total time spent on a bike : "+ user8.getTimeSpentOnBike() );
 								System.out.println("Total charge amount : "+ user8.getChargesAmount());
@@ -177,6 +195,7 @@ public class Controls_CLUI {
 			
 			case "passingtime": int time = Integer.parseInt(reader.next());
 								MyVelib.getClock().addTime(time*1000/60);
+								System.out.println(time +" minutes have passed.");
 								break;
 			
 			case "putofflineendstation" : 	int userID10 = Integer.parseInt(reader.next());
@@ -192,13 +211,35 @@ public class Controls_CLUI {
 			
 			case "endride" :int userID31 = Integer.parseInt(reader.next());
 			   if (basics.getUser(userID31).possessBicycle == true) {
+				   double a1 = basics.getUser(userID31).getChargesAmount();
 				   System.out.println("User "+userID31+" has parked his bike at station "+  basics.getUser(userID31).currentRide.getRidePath().getEndStation().getID());
 				   basics.getUser(userID31).currentRide.getRidePath().getEndStation().parkBicycle(basics.getUser(userID31).bicycle,basics.getUser(userID31));
+				   double b1 = basics.getUser(userID31).getChargesAmount();
+				   System.out.println("The ride has costed "+ (b1-a1)+ "euros.");
 			   }
 			   else {
 				   System.out.println("the user possess no bike to return...");
 			   }
 			   break;
+			
+			case "help": System.out.println("setup <MyVelibNetworkName>\r\n" + 
+					"runtest <Path>\r\n" + 
+					"adduser <UserName> <CardType> <VelibName>\r\n" + 
+					"setgps <UserID> <x> <y>\r\n" + 
+					"stationsetgps <StationID> <x> <y>\r\n" + 
+					"offline <VelibNetworkName> <StationID>\r\n" + 
+					"online <VelibNetworkName> <StationID>\r\n" + 
+					"rentbike <userID> <StationID>\r\n" + 
+					"returnbike <userID> <StationID>\r\n" + 
+					"displaystation <VelibNetworkName> <StationID>\r\n" + 
+					"displayuser <userID>\r\n" + 
+					"display <VelibNetworkName>\r\n" + 
+					"askforrideplan <userID> <x> <y> <BikeType> <AlgType> <VelibNetworkName>\r\n" + 
+					"displayride <userID>\r\n" + 
+					"passingtime <time(int)>\r\n" + 
+					"putofflineendstation <userID>\r\n" + 
+					"startride <userID>\r\n" + 
+					"endride <userID>\r\n");break;
 				
 			default : System.out.println("command not recognized."); flagg = false; break;
 			}

@@ -1,26 +1,9 @@
-setup paris
-adduser tom VLIB paris
-adduser felix VMAX paris
-display paris 
+setup p
+adduser tom VLIBRE p
+display p
+displayuser 0 
+rentbike 0 5 MECHANICAL
+passingtime 75
+returnbike 0 3 
 displayuser 0
-displayuser 1
-askforrideplan 0 3 9 ELECTRIC fastest paris
-passingtime 90
-startride 0
-putofflineendstation 0
-displayride 0
-passingtime 90
-endride 0
-displaystation paris 2
-rentbike 1 2 ELECTRIC
-displaystation paris 2
-passingtime 130
-displaystation paris 8
-returnbike 1 8
-displaystation paris 8
-displayuser 0
-displayuser 1
 exit
-
-
-endride 0

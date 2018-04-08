@@ -3,7 +3,11 @@ package myVelib.Misc;
 import myVelib.Bicycle.Bicycle;
 import myVelib.Card.Card;
 import myVelib.Station.Station;
-
+/**
+ * 
+ * Class representing the user. It has a name, a position, a card, an ID, and different statistics.
+ *
+ */
 public class User {
 	
 	
@@ -20,7 +24,12 @@ public class User {
 	public long TimeOfLastRenting;
 	public Boolean possessBicycle;
 	public Bicycle bicycle;
-	
+	/**
+	 * initiate user.
+	 * @param name
+	 * @param position
+	 * @param card
+	 */
 	public User(String name, GPS position, Card card) {
 		this.bicycle = null;
 		this.possessBicycle = false;
@@ -95,6 +104,10 @@ public class User {
 		// TODO Auto-generated method stub
 		return ID;
 	}
+	/**
+	 * display the current planned ride of the user if he has any.
+	 * @param u
+	 */
 	public static void displayRide(User u) {
 		int cityDimension = u.getCurrentRide().getVelibNW().getCityDimension();
 		for(int i = 0; i< cityDimension; i ++) {
