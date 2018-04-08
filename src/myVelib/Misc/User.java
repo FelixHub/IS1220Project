@@ -144,8 +144,14 @@ public class User {
 	}
 
 
+
 	public void setGPS(GPS position2) {
 		position = position2;
 		
 	}
+
+	public Bicycle getBicycle() {
+		return bicycle;
+	}
+	
 }
