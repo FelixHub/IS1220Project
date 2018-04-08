@@ -48,7 +48,7 @@ public abstract class Station extends Observable {
 	 * - total time the i-eme parkingSpot was occupied in first line
 	 * - last time a bicycle was park in the i-eme parkingSpot 
 	 */
-	long[][] occupationRecord;
+	public long[][] occupationRecord;
 	
 	ArrayList<Observer> incomingRides;
 	
@@ -94,6 +94,7 @@ public abstract class Station extends Observable {
 						user.setTimeSpentOnBike(returnTime - user.TimeOfLastRenting);
 						removeObserver(user.getCurrentRide());
 						user.setCurrentRide(null);
+						user.setGPS(position);
 						user.bicycle = null;
 						user.possessBicycle = false;
 						if ((this.type).equalsIgnoreCase("PLUS")){
@@ -128,6 +129,8 @@ public abstract class Station extends Observable {
 						if (user.getCurrentRide() != null) {
 						user.getCurrentRide().setBicycle(temp);
 						}
+						user.setBicycle(temp);
+						user.possessBicycle = true;
 						return temp;
 					}
 				}
@@ -208,8 +211,10 @@ public abstract class Station extends Observable {
 		long ts = MyVelib.getClock().getTime();
 		float s = 0;
 		for(int i = 0; i< capacity;i++) {
+			if (parkingSlots[i] != null) {
 			occupationRecord[i][0] = occupationRecord[i][0] + (ts - occupationRecord[i][1]);
 			occupationRecord[i][1] = ts;
+			}
 			s = s + occupationRecord[i][0];
 			}
 		s = s/(ts*capacity);
@@ -226,6 +231,10 @@ public abstract class Station extends Observable {
 	}
 	public String toString() {
 		return  type + "station"+getID();
+	}
+	public void setGPS(GPS gps) {
+		// TODO Auto-generated method stub
+		
 	}
  
 }

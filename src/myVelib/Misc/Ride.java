@@ -67,8 +67,7 @@ public class Ride implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-			getRidePath().path(start,end,getVelibNW(),bicycle.getType());
-		
+			ridePath.path(start,end,getVelibNW(),bicycle.getType());
 	}
 
 	public void setBicycle(Bicycle b) {
@@ -101,6 +100,10 @@ public class Ride implements Observer{
 
 	public MyVelib getVelibNW() {
 		return velibNW;
+	}
+
+	public BicycleType getType() {
+		return bicycle.getType();
 	}
 	
 }

@@ -1,5 +1,7 @@
 package myVelib;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,9 +43,13 @@ public class Controls_CLUI {
 		String commande = "";
 		boolean flagg = true;
 		while ( (!((commande = reader.next()).equalsIgnoreCase("exit"))) && flagg ) {
-			
+			System.out.println(" ");
 			switch(commande) {
 			
+			case "runtest":	String path = reader.next();
+							File file = new File(path);
+							reader = new Scanner(file);
+							break;
 			case "setup": String name = reader.next();
 							MyVelib mv = MyVelib.myVelibINI(name);
 							basics.velibnetworks.add(mv);
@@ -61,6 +67,18 @@ public class Controls_CLUI {
 							System.out.println("User "+userName+" of ID "+u.getID()+" with "+u.getUserCard()+" card, has been added to the "+velibName+" network.");
 							break;
 							
+			
+			case "setgps":	int userID0 = Integer.parseInt(reader.next());
+				 			User user0 = basics.getUser(userID0);
+				 			user0.setGPS(new GPS (Integer.parseInt(reader.next()),Integer.parseInt(reader.next())));
+							break;
+							
+		case "stationsetgps":	int stationID0 = Integer.parseInt(reader.next());
+								int x =Integer.parseInt(reader.next());
+								int y = Integer.parseInt(reader.next());
+ 								basics.getStation(stationID0).setGPS(new GPS (x,y));
+ 								break;
+					
 			case "offline": String velibnetworkName = reader.next();
 							int stationID = Integer.parseInt(reader.next());
 							MyVelib my_velib = basics.getMyVelib(velibnetworkName);
@@ -98,49 +116,48 @@ public class Controls_CLUI {
 							   if (user3.possessBicycle == true) {
 								   station3.parkBicycle(user3.bicycle,user3);
 								   System.out.println("User "+userID3+" has parked his bike at station "+ stationID3);
-								   System.out.println("His charges balance is now at "+user3.getChargesAmount()+ "euros." );
 							   }
 							   else {
 								   System.out.println("the user possess no bike to return...");
 							   }
 							   break;
 							   
-			case "displayStation": 	String velibnetworkName4 = reader.next();
+			case "displaystation": 	String velibnetworkName4 = reader.next();
 									int stationID4 = Integer.parseInt(reader.next());
 									MyVelib my_velib4 = basics.getMyVelib(velibnetworkName4);
 									Station station4 = my_velib4.getStation(stationID4);
-									System.out.println("Number of renting operations from station "+
-											stationID4 + " : "+ station4.getNbRent());
-									System.out.println("Number of return operations from station "+
-											stationID4 + " : "+ station4.getNbReturn());
-									//réparer averagerateofoccupation qui ne marche pas très bien...
+									System.out.println("* * * Station "+ stationID4+" * * *");
+									System.out.println("Number of renting operations : "+ station4.getNbRent());
+									System.out.println("Number of return operations : "+ station4.getNbReturn());
 									System.out.println("Average rate of occupation : "+ station4.averageRateOfOccupation());
+									System.out.println("* * * * * * * * * * * *");
 									break;
 									
-			case "displayUser":	int userID8 = Integer.parseInt(reader.next());
+			case "displayuser":	int userID8 = Integer.parseInt(reader.next());
 								User user8 = basics.getUser(userID8);
-								System.out.println("Number of ride performed by user "+ userID8+" : "+ user8.getRidesNb());
+								System.out.println("* * * User "+ userID8+" * * *");
+								System.out.println("Number of ride performed : "+ user8.getRidesNb());
 								System.out.println("Total time spent on a bike : "+ user8.getTimeSpentOnBike() );
 								System.out.println("Total charge amount : "+ user8.getChargesAmount());
 								System.out.println("Current time credit : "+ user8.getTimeCreditBalance());
+								System.out.println("GPS coordinate : "+ user8.getPosition());
+								System.out.println("* * * * * * * * * * * *");
 								break;
-				
-			case "sortStation":
 				
 			case "display":	String velibnetworkName5 = reader.next();
 							MyVelib my_velib5 = basics.getMyVelib(velibnetworkName5);
 							my_velib5.displayState();
+							System.out.println("Users number : "+ my_velib5.getUsers().size());
+							System.out.println("Stations number : "+ my_velib5.getStations().size());
 							break;
 							
-			case "askForRidePlan":	int userID6 = Integer.parseInt(reader.next());
-									User user6 = basics.getUser(userID6);
-									int x = Integer.parseInt(reader.next());
-									int y = Integer.parseInt(reader.next());
+			case "askforrideplan":	int userID6 = Integer.parseInt(reader.next());
+									int x1 = Integer.parseInt(reader.next());
+									int y1 = Integer.parseInt(reader.next());
 									String type6 = reader.next();
 									String algtype6 = reader.next();
 									String velibName6 = reader.next();
-									MyVelib my_velib6 = basics.getMyVelib(velibName6);
-									GPS dest = new GPS(x,y);
+									GPS dest = new GPS(x1,y1);
 									AlgType alg = null;
 									switch(algtype6) {
 										case"avoidplus" : alg = AlgType.AVOIDPLUS; break;
@@ -149,20 +166,40 @@ public class Controls_CLUI {
 										case"shortest": alg = AlgType.SHORTEST; break;
 										default : alg = AlgType.SHORTEST; break;
 										}
-									System.out.println(user6.getCurrentRide().getVelibNW().getCityDimension());
-									user6.setCurrentRide(new Ride(user6.getPosition(),dest, type6, my_velib6, alg));
-									user6.displayRide(user6);
+									basics.getUser(userID6).setCurrentRide(new Ride(basics.getUser(userID6).getPosition(),dest, type6, basics.getMyVelib(velibName6), alg));
+									basics.getUser(userID6).displayRide(basics.getUser(userID6));
 									break;
 				
-			case "displayRide": int userID7 = Integer.parseInt(reader.next());
+			case "displayride": int userID7 = Integer.parseInt(reader.next());
 			 					User user7 = basics.getUser(userID7);
 								User.displayRide(user7);
 								break;	
 			
-			case "passingTime": int time = Integer.parseInt(reader.next());
+			case "passingtime": int time = Integer.parseInt(reader.next());
 								MyVelib.getClock().addTime(time*1000/60);
 								break;
-								
+			
+			case "putofflineendstation" : 	int userID10 = Integer.parseInt(reader.next());
+			System.out.println("the station "+basics.getUser(userID10).currentRide.getRidePath().getEndStation().getID()+" is now offline.");
+											basics.getUser(userID10).currentRide.getRidePath().getEndStation().putOffLine();
+											break;
+											
+			case "startride" : int userID21 = Integer.parseInt(reader.next());
+			basics.getUser(userID21).setBicycle(basics.getUser(userID21).currentRide.getRidePath().getStartStation().takeBicycle(basics.getUser(userID21).currentRide.getType(), basics.getUser(userID21)));
+			basics.getUser(userID21).possessBicycle = true;
+			System.out.println("User "+basics.getUser(userID21).getName()+" rented a "+ basics.getUser(userID21).currentRide.getType()+" bike at station "+ basics.getUser(userID21).currentRide.getRidePath().getStartStation().getID());
+			break;
+			
+			case "endride" :int userID31 = Integer.parseInt(reader.next());
+			   if (basics.getUser(userID31).possessBicycle == true) {
+				   System.out.println("User "+userID31+" has parked his bike at station "+  basics.getUser(userID31).currentRide.getRidePath().getEndStation().getID());
+				   basics.getUser(userID31).currentRide.getRidePath().getEndStation().parkBicycle(basics.getUser(userID31).bicycle,basics.getUser(userID31));
+			   }
+			   else {
+				   System.out.println("the user possess no bike to return...");
+			   }
+			   break;
+				
 			default : System.out.println("command not recognized."); flagg = false; break;
 			}
 			
@@ -183,17 +220,16 @@ public class NetworkDoesNotExist extends Throwable {
 
 	public MyVelib getMyVelib(String name) throws NetworkDoesNotExist{
 		boolean flag = false;
-		MyVelib ss = null;
 		for(MyVelib mv : velibnetworks) {
 			if (mv.getName().equalsIgnoreCase(name)) {
 				flag = true;
-				ss = mv;
+				return mv;
 			}
 		}
 		if (!(flag)) {
 			throw new NetworkDoesNotExist(name);
 		}
-		return ss;
+		return null;
 	}
 	
 public class UserDoesNotExist extends Throwable {
@@ -204,17 +240,16 @@ public class UserDoesNotExist extends Throwable {
 	}
 	public User getUser(int ID) throws UserDoesNotExist {
 		boolean flag = false;
-		User ss = null;
 		for(User u : usersGlobal) {
 			if (u.getID() == ID) {
 				flag = true;
-				ss = u;
+				return u;
 			}
 		}
 		if (!(flag)) {
 			throw new UserDoesNotExist(ID);
 		}
-		return ss;
+		return null;
 	}
 	
 public class StationDoesNotExist extends Throwable {
@@ -225,17 +260,16 @@ public class StationDoesNotExist extends Throwable {
 	}
 	public Station getStation(int ID) throws StationDoesNotExist {
 		boolean flag = false;
-		Station ss = null;
 		for(Station u : stationsGlobal) {
 			if (u.getID() == ID) {
 				flag = true;
-				ss = u;
+				return u;
 			}
 		}
 		if (!(flag)) {
 			throw new StationDoesNotExist(ID);
 		}
-		return ss;
+		return null;
 	}
 	
 

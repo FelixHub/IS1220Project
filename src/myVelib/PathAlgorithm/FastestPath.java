@@ -58,7 +58,9 @@ public class FastestPath implements PathFinder {
 					if((t==0) || ((di+df)*9/10+velibNW.getDistanceMap()[i][j]*9/50 < t) 
 							&& (i!=j) 
 							&& (velibNW.getStations().get(j).freeParkingSpotsNb()!=0) 
-							&& (velibNW.getStations().get(i).countBicycle(type)!=0)) {
+							&& (velibNW.getStations().get(i).countBicycle(type)!=0)
+							&& (velibNW.getStations().get(i).getState()=="ONSERVICE")
+							&& (velibNW.getStations().get(j).getState()=="ONSERVICE")) {
 							
 						startS=velibNW.getStations().get(i);
 						endS=velibNW.getStations().get(j);

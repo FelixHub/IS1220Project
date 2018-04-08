@@ -112,7 +112,7 @@ public class User {
 				else{
 					for(Station station : u.getCurrentRide().getVelibNW().getStations()) {
 					if ( ( station.getPosition().getX() == j) && (station.getPosition().getY() == i)) {
-						if(station.getState()=="OFFSERVICE") {
+						if(station.getState()=="OFFLINE") {
 							s = s + "X  ";
 						}
 						else if (station.type == "PLUS") {
@@ -140,6 +140,12 @@ public class User {
 
 	public void setBicycle(Bicycle b) {
 		bicycle =b;
+		
+	}
+
+
+	public void setGPS(GPS position2) {
+		position = position2;
 		
 	}
 }

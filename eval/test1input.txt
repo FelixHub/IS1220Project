@@ -1,0 +1,9 @@
+setup p
+adduser tom VLIBRE p
+display p
+displayuser 0 
+rentbike 0 5 MECHANICAL
+passingtime 75
+returnbike 0 3 
+displayuser 0
+exit

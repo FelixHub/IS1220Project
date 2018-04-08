@@ -50,16 +50,18 @@ public class MyVelib {
 		int cityDimension = Integer.parseInt(prop.getProperty("cityDim"));
 		int n = Integer.parseInt(prop.getProperty("stationsNumber"));
 		int m = Integer.parseInt(prop.getProperty("parkingSlotNumberByStation"));
-		 
+		int plusRate = Integer.parseInt(prop.getProperty("plusStationRate"));
+		int emptyRate = Integer.parseInt(prop.getProperty("emptyParkingSpotRate"));
+		
 		ArrayList<Station> stations = new ArrayList<Station>();
 		ArrayList<User> users = new ArrayList<User>();
 		
 		for(int i = 0; i<n;i++) {
 			GPS gps = new GPS(cityDimension);
 			Random rn = new Random();
-			int randomNum = rn.nextInt(2);
+			int randomNum = rn.nextInt(100);
 			Station s = null;
-			if (randomNum == 0) {
+			if (randomNum >= plusRate) {
 				s = new StandardStation(gps,m) ;
 			}
 			else{
@@ -67,15 +69,22 @@ public class MyVelib {
 			}
 			for(int j = 0;j<m;j++) {
 				Random rd = new Random();
-				int randomNum1 = rd.nextInt(10);
-				if ( randomNum1 < 8 ) {
+				int randomNum1 = rd.nextInt(100);
+				if ( randomNum1 >= emptyRate) {
 					s.getParkingSlots()[j] = Bicycle.randomBicycle();
 				}
 			}
 			stations.add(s);
 		}
-		
-		return new MyVelib(stations,users,cityDimension,name);
+		MyVelib my_velib = new MyVelib(stations,users,cityDimension,name);
+		for(Station s : my_velib.getStations()) {
+		for(int i = 0;i<m;i++) {
+			if(s.getParkingSlots()[i] != null) {
+			s.occupationRecord[i][1] = MyVelib.getClock().getTime();
+			}
+		}
+		}
+		return my_velib;
 	}
 	
 	
@@ -202,4 +211,14 @@ public class MyVelib {
 			System.out.println(s);
 		}
 	}
+	/*
+	public ArrayList<Station> mostUsedStations(){
+		
+		for (int i = 0; i< stations.size(); i++) {
+			for (int j = i; j< stations.size(); j++) {
+				
+			}
+		}
+		return s
+	}*/
 }
