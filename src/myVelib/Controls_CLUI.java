@@ -64,7 +64,7 @@ public class Controls_CLUI {
 							User u = new User(userName,new GPS(my_velib0.getCityDimension()), Card.Card(cardType));
 							my_velib0.addUser(u);
 							basics.usersGlobal.add(u);
-							System.out.println("User "+userName+" of ID "+u.getID()+" with "+u.getUserCard()+" card, has been added to the "+velibName+" network.");
+					 		System.out.println("User "+userName+" of ID "+u.getID()+" with "+u.getUserCard()+" card, has been added to the "+velibName+" network.");
 							break;
 							
 			
