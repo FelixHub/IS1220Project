@@ -37,18 +37,18 @@ public class Controls_CLUI {
 		this.stationsGlobal = new ArrayList<Station>();
 	}
 	/**
-	 * 
+	 *  the only main method of our project, which deal with the whole CLUI.
 	 * @param args
-	 * @throws NetworkDoesNotExist
-	 * @throws StationDoesNotExist
-	 * @throws FileNotFoundException
+	 * @throws NetworkDoesNotExist exception raised if calling inexisting myvelibnetwork...
+	 * @throws StationDoesNotExist exception raised if calling inexisting station...
+	 * @throws FileNotFoundException exception raised if calling inexisting testSscenario.txt...
 	 * @throws IOException
-	 * @throws myVelib.MyVelib.StationDoesNotExist
-	 * @throws UserDoesNotExist
-	 * @throws EmptyStationException
-	 * @throws UserAlreadyHaveBicycleException
-	 * @throws OffLineStationException
-	 * @throws FullStationException
+	 * @throws myVelib.MyVelib.StationDoesNotExist exception raised if calling inexisting station...
+	 * @throws UserDoesNotExist exception raised if calling inexisting user...
+	 * @throws EmptyStationException exception raised if trying to take a bike from an empty station
+	 * @throws UserAlreadyHaveBicycleException exception raised if the user try to rent more than one bike at the same time
+	 * @throws OffLineStationException exception raised if the user try to rent a bike from an offline station...
+	 * @throws FullStationException exception raised if the user try to park his bike in an already full station...
 	 */
 	public static void main(String[] args) throws NetworkDoesNotExist, StationDoesNotExist, FileNotFoundException, IOException, myVelib.MyVelib.StationDoesNotExist, UserDoesNotExist, EmptyStationException, UserAlreadyHaveBicycleException, OffLineStationException, FullStationException {
 		Controls_CLUI basics = new Controls_CLUI();
@@ -258,7 +258,12 @@ public class NetworkDoesNotExist extends Throwable {
 		System.out.println("the network named "+name+" does not exist in this universe...");
 		}
 	}
-
+	/**
+	 * method to find the myvelibnetwork corresponding to a myvelibname
+	 * @param name
+	 * @return
+	 * @throws NetworkDoesNotExist
+	 */
 	public MyVelib getMyVelib(String name) throws NetworkDoesNotExist{
 		boolean flag = false;
 		for(MyVelib mv : velibnetworks) {
@@ -279,6 +284,12 @@ public class UserDoesNotExist extends Throwable {
 		System.out.println("the user of ID "+ID+" does not exist in this universe...");
 		}
 	}
+/**
+ * method to find the user corressponding to the userID ID.
+ * @param ID
+ * @return
+ * @throws UserDoesNotExist
+ */
 	public User getUser(int ID) throws UserDoesNotExist {
 		boolean flag = false;
 		for(User u : usersGlobal) {
@@ -299,6 +310,12 @@ public class StationDoesNotExist extends Throwable {
 		System.out.println("the station of ID "+ID+" does not exist in this universe...");
 		}
 	}
+/**
+ * mehtod to find the station corresponding to the StationID ID.
+ * @param ID
+ * @return
+ * @throws StationDoesNotExist
+ */
 	public Station getStation(int ID) throws StationDoesNotExist {
 		boolean flag = false;
 		for(Station u : stationsGlobal) {

@@ -27,8 +27,8 @@ public class User {
 	/**
 	 * initiate user.
 	 * @param name
-	 * @param position
-	 * @param card
+	 * @param position gps coordinate of a position in the myvelib city.
+	 * @param card VLIBRE, VMAX or NOCARD.
 	 */
 	public User(String name, GPS position, Card card) {
 		this.bicycle = null;

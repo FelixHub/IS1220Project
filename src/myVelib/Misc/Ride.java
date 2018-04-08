@@ -31,11 +31,11 @@ public class Ride implements Observer{
 
 	/**
 	 * this constructor run the path method from subclasses from PathFinder in order to get the StartStation and EndStation.
-	 * @param start
-	 * @param end
-	 * @param type
-	 * @param velibNW
-	 * @param algType
+	 * @param start the GPS position of the user at the moment he asked for a ride planning.
+	 * @param end   the GPS position of where the user wishes to get.
+	 * @param type  the type of bike the user want to use during his ride.
+	 * @param velibNW the myvelib Network in which the user exist.
+	 * @param algType the pathfinding algorithm the user wants to be applied.
 	 */
 	
 	public Ride(GPS start, GPS end, String type, MyVelib velibNW, AlgType algType ) {

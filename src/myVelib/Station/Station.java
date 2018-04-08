@@ -171,7 +171,7 @@ public abstract class Station extends Observable {
 	
 	/**
 	 * return the number of bicycle of a certain type available at the station 
-	 * @param type
+	 * @param type electric or mechanical.
 	 * @return
 	 */
 	

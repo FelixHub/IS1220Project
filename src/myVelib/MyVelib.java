@@ -36,13 +36,12 @@ public class MyVelib {
 	private int cityDimension;
 	private String name;
 	/**
-	 * 
-	 * @param listOfStations
-	 * @param listOfUsers
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
+	 * a constructor for myVelib which rely on the properties of the my_velib.ini file.
+	 * @param name
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
 	 */
-	
 	public static MyVelib myVelibINI(String name) throws FileNotFoundException, IOException {
 		
 		final Properties prop = new Properties();
@@ -87,7 +86,13 @@ public class MyVelib {
 		return my_velib;
 	}
 	
-	
+	/**
+	 * principal constructor of myVelib.
+	 * @param listOfStations arrayList of the network's stations
+	 * @param listOfUsers arraylist of the network's users
+	 * @param cityDimension dimension of the city (ex : 100*100 )
+	 * @param name name of the network
+	 */
 	public MyVelib(ArrayList<Station> listOfStations,ArrayList<User> listOfUsers, int cityDimension, String name) {
 		
 		this.name = name;
@@ -133,6 +138,10 @@ public class MyVelib {
 	public ArrayList<Station> getStations() {
 		return stations;
 	}
+	/**
+	 * return the most used station of the network.
+	 * @return
+	 */
 	public int mostUsedStation() {
 		int maxID=0;
 		int max = 0;
@@ -145,6 +154,10 @@ public class MyVelib {
 		
 		return maxID;
 	}
+	/**
+	 * return the least occupied station of the network
+	 * @return
+	 */
 	public int leastOccupiedStation() {
 		int leastID = 0;
 		float least = 1;
@@ -163,6 +176,12 @@ public class MyVelib {
 		System.out.println("la station d'ID "+ID+" does not exist in this universe...");
 		}
 	}
+	/**
+	 * get station with ID ID.
+	 * @param ID
+	 * @return
+	 * @throws StationDoesNotExist if there is no such station...
+	 */
 	public Station getStation(int ID) throws StationDoesNotExist {
 		boolean flag = false;
 		Station ss = null;
@@ -183,7 +202,9 @@ public class MyVelib {
 	public int getCityDimension() {
 		return cityDimension;
 	}
-	
+	/**
+	 * display graphically the state of the network, with statistics.
+	 */
 	public void displayState() {
 		String s = "";
 		boolean flag = true;
@@ -211,14 +232,4 @@ public class MyVelib {
 			System.out.println(s);
 		}
 	}
-	/*
-	public ArrayList<Station> mostUsedStations(){
-		
-		for (int i = 0; i< stations.size(); i++) {
-			for (int j = i; j< stations.size(); j++) {
-				
-			}
-		}
-		return s
-	}*/
 }
